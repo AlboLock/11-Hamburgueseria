@@ -3,9 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Oswald:wght@200..700&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
+
     <title>Rivas&Luck Burgers</title>
 </head>
+
 <body>
-    <h1>Lucchetti </h1>
+    <div class="productosDestacados">
+        <div class="productos">
+            <h1>Productos Destacados</h2>
+            <div class="burguer">
+                <img src="media/burger.png">
+                <h3>The Luck Burger</h3>
+                <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, bacon crujiente, cebolla morada y nuestra salsa Lucchetti.</p>
+                <p>Precio: 8.95 €</p>
+                <button>+</button>
+            </div>
+
+            <div class="hotDog">
+                <img src="media/perrito.png">
+                <h3>Hot Dog Rivas</h3>
+                <p>Salchicha Frankfurt premium, bañada en queso manchego derretido, crujientes cebollitas fritas, y nuestra exclusiva salsa Manu's BBQ.</p>
+                <p>Precio: 5.95 €</p>
+                <button>+</button>
+            </div>
+
+            <div class="bocadillo">
+                <img src="media/bocadillo.png">
+                <h3>Panino Lucchetti Speciale</h3>
+                <p>Crujiente pan italiano relleno con finas láminas de pollo marinadas al pesto, mozzarella fresca fundida, rúcula, tomate seco y un toque de alioli artesano al estilo Cattolica.</p>
+                <p>Precio: 7.95 €</p>
+                <button>+</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="pedidosEnProceso">
+        <h2>Pedidos en proceso</h2>
+        <div class="pedidoDisplay">
+            <p><strong>Pedido #01</strong></p>
+            <p>Producto: The Luck Burger</p>
+            <p>Estado: Realizado</p>
+            <p>Tiempo restante: 1 minuto</p>
+            <button>Recoger pedido</button>
+        </div>
+    </div>
+
+    <div class="pedido">
+        <h2>Mi Pedido</h2>
+        <p><strong>Número de pedido:</strong> #01</p>
+
+        <h3>Producto Seleccionado:</h3>
+        <p><strong>Nombre:</strong> The Luck Burger</p>
+        <p><strong>Cocción:</strong> Al punto</p>
+        <p><strong>Extras:</strong> Bacon, cebolla caramelizada</p>
+        <p><strong>Bebida:</strong> Coca-Cola Zero</p>
+
+        <h3>Cantidad:</h3>
+        <button>-</button>
+        <span>1</span>
+        <button>+</button>
+
+        <h3>Tipo de entrega:</h3>
+        <button>Entrega a domicilio</button>
+        <button>Recoger en el local</button>
+
+        <h3>Total del pedido:</h3>
+        <p><strong>8.95 € </strong></p>
+
+        <button class="btnConfirmarPedido">Confirmar Pedido</button>
+    </div>
+
+<script src="script.js"></script>
 </body>
 </html>
