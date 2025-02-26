@@ -1,0 +1,104 @@
+body {
+    display: flex; 
+    justify-content: space-between;  
+    background-color: #faf8f2; 
+    padding: 20px;
+    font-family: "Oswald", sans-serif;
+    gap: 1%;
+}
+
+
+.productosDestacados {
+    width: 45%; 
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.productos{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+
+}
+
+.pedidosEnProceso, .pedido {
+    width: 27.5%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.burguer, .hotDog, .bocadillo {
+    width: 20%;  
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.productos img {
+    width: 100%;
+    max-width: 140px;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out; 
+    cursor: pointer;
+}
+
+.productos img:hover {
+    transform: scale(1.3); 
+}
+
+button {
+    background-color: #D62300; 
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #B22222;
+}
+
+
+.pedido button {
+    width: 100%;
+    background-color: #28A745;
+    font-size: 18px;
+    padding: 15px;
+}
+
+
+.pedidoDisplay {
+    background-color: #ffffff;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+h1, h2, h3, p {
+    text-align: center;
+}
+h1, h2 {
+    color: #D62300;
+}
+p {
+    color: #502314;
+}
+
+p strong {
+    color: #FFC72C; 
+}
+
+
