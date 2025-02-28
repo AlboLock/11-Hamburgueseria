@@ -1,6 +1,8 @@
 *{
     font-family: "Oswald", sans-serif;
     gap: 1%;
+    margin: 0;
+    padding: 0;
 } 
 
 .principal {
@@ -202,6 +204,10 @@ p strong {
 }
 
 /* ---------------- Ventana modificar pedido -------------------------------- */
+#modifyWindow *{
+    box-sizing: border-box;
+}
+
 #modifyWindow{
     position: absolute;
     top: 0;
