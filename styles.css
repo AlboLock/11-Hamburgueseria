@@ -4,6 +4,8 @@
 } 
 
 .principal {
+    width: 100%;
+    height: auto;
     display: flex; 
     justify-content: space-between;  
     background-color: #faf8f2; 
