@@ -20,48 +20,35 @@
                 <div class="producto">
                     <img src="media/burger.png">
                     <h3>The Luck Burger</h3>
-                    <p>Precio: 8.95 €</p>
-                    <button>+</button>
-
                     <div class="descripcion">
-                        <img src="media/burger.png">
-                        <h3>The Luck Burger</h3>
-                        <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, bacon crujiente, cebolla morada y nuestra salsa Lucchetti.</p>                
-                        <p>Precio: 8.95 €</p>
-                        <button>+</button>
-                    </div>    
+                        <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, bacon crujiente, cebolla morada y nuestra salsa Lucchetti.</p>
+                    </div>
+                    <p>Precio: 8.95 €</p>
+                    <button onclick="abrirVentanaModificar()">+</button>
                 </div>
         
         
                 <div class="producto">
                     <img src="media/perrito.png">
                     <h3>Hot Dog Rivas</h3>
-                    <p>Precio: 5.95 €</p>
-                    <button>+</button>
-
                     <div class="descripcion">
-                        <img src="media/perrito.png">
-                        <h3>Hot Dog Rivas</h3>
                         <p>Salchicha Frankfurt premium, bañada en queso manchego derretido, crujientes cebollitas fritas, y nuestra exclusiva salsa Manu's BBQ.</p>
-                        <p>Precio: 5.95 €</p>
-                        <button>+</button>                   
                     </div>
+                    <p>Precio: 5.95 €</p>
+                    <button onclick="abrirVentanaModificar()">+</button>
+
+                    
 
                 </div>
         
                 <div class="producto">
                     <img src="media/bocadillo.png">
                     <h3>Panino Lucchetti Speciale</h3>
-                    <p>Precio: 7.95 €</p>
-                    <button>+</button>
-
                     <div class="descripcion">
-                        <img src="media/bocadillo.png">
-                        <h3>Panino Lucchetti Speciale</h3>
                         <p>Crujiente pan italiano relleno con finas láminas de pollo marinadas al pesto, mozzarella fresca fundida, rúcula, tomate seco y un toque de alioli artesano al estilo Cattolica.</p>
-                        <p>Precio: 7.95 €</p>
-                        <button>+</button>
                     </div>
+                    <p>Precio: 7.95 €</p>
+                    <button onclick="abrirVentanaModificar()">+</button>
                 </div>
         
             </div>
@@ -115,7 +102,7 @@
 <!-- -------------------------Ventana modificar pedido---------------------------- -->
     <div id="modifyWindow">
         <div id="modify-panel">
-            <div id="closeButton"><img src="media/close-icon.png" alt=""></div>
+            <div id="closeButton"><img onclick="document.getElementById('modifyWindow').style.display = 'none'" src="media/close-icon.png" alt=""></div>
             <div class="col2">
                 <img src="media/burger.png" alt="">
             </div>

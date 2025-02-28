@@ -6,3 +6,7 @@ function toggleExtras(idExpandable, header) {
     else
         expandable.style.height = null;
 }
+
+function abrirVentanaModificar(){
+    document.getElementById('modifyWindow').style.display = 'flex';
+}
