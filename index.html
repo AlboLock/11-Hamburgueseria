@@ -14,16 +14,21 @@
 <body>
     <div class="productosDestacados">
         <h1>Productos Destacados</h1>
-        <div class="productos">
-        
+        <div class="todosProductos">
+
             <div class="producto">
                 <img src="media/burger.png">
                 <h3>The Luck Burger</h3>
                 <p>Precio: 8.95 €</p>
                 <button>+</button>
+
                 <div class="descripcion">
-                    <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, bacon crujiente, cebolla morada y nuestra salsa Lucchetti.</p>
-                </div>
+                    <img src="media/burger.png">
+                    <h3>The Luck Burger</h3>
+                    <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, bacon crujiente, cebolla morada y nuestra salsa Lucchetti.</p>                
+                    <p>Precio: 8.95 €</p>
+                    <button>+</button>
+                </div>    
             </div>
     
     
@@ -32,19 +37,29 @@
                 <h3>Hot Dog Rivas</h3>
                 <p>Precio: 5.95 €</p>
                 <button>+</button>
+
                 <div class="descripcion">
+                    <img src="media/perrito.png">
+                    <h3>Hot Dog Rivas</h3>
                     <p>Salchicha Frankfurt premium, bañada en queso manchego derretido, crujientes cebollitas fritas, y nuestra exclusiva salsa Manu's BBQ.</p>
+                    <p>Precio: 5.95 €</p>
+                    <button>+</button>                   
                 </div>
+
             </div>
-    
     
             <div class="producto">
                 <img src="media/bocadillo.png">
                 <h3>Panino Lucchetti Speciale</h3>
                 <p>Precio: 7.95 €</p>
                 <button>+</button>
+
                 <div class="descripcion">
+                    <img src="media/bocadillo.png">
+                    <h3>Panino Lucchetti Speciale</h3>
                     <p>Crujiente pan italiano relleno con finas láminas de pollo marinadas al pesto, mozzarella fresca fundida, rúcula, tomate seco y un toque de alioli artesano al estilo Cattolica.</p>
+                    <p>Precio: 7.95 €</p>
+                    <button>+</button>
                 </div>
             </div>
     
@@ -63,6 +78,8 @@
         </div>
     </div>
 
+
+
     <div class="pedido">
         <h2>Mi Pedido</h2>
         <p><strong>Número de pedido:</strong> #01</p>
@@ -73,19 +90,25 @@
         <p><strong>Extras:</strong> Bacon, cebolla caramelizada</p>
         <p><strong>Bebida:</strong> Coca-Cola Zero</p>
 
+        
         <h3>Cantidad:</h3>
-        <button>-</button>
-        <span>1</span>
-        <button>+</button>
-
+        <div class="btnPedidoCantidad">
+            <button>-</button>
+            <span>1</span>
+            <button>+</button>
+        </div>
+        
         <h3>Tipo de entrega:</h3>
-        <button>Entrega a domicilio</button>
-        <button>Recoger en el local</button>
+        <div class="btnTipoEntrega">
+            <button>Entrega a domicilio</button>
+            <button>Recoger en el local</button>    
+        </div>
 
         <h3>Total del pedido:</h3>
-        <p><strong>8.95 € </strong></p>
-
-        <button class="btnConfirmarPedido">Confirmar Pedido</button>
+        <div class="btnConfirmarPedido">
+            <p><strong>8.95 € </strong></p>
+            <button>Confirmar Pedido</button>
+        </div>
     </div>
 
 <script src="script.js"></script>
