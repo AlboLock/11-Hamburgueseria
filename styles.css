@@ -1,4 +1,4 @@
-body {
+.principal {
     display: flex; 
     justify-content: space-between;  
     background-color: #faf8f2; 
