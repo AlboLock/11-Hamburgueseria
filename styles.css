@@ -14,19 +14,21 @@
     padding: 20px;
 }
 
-.productosDestacadosYPedido {
+.productosGlobalesYPedido {
     display: flex;
     width: 100%;
 }
 .pedido {
+    display: flex;
+    flex-direction: column;
     width: 20%;
     background-color: white;
-    padding: 20px;
+    padding: 30px 20px 20px 20px ;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
 }
 
-.productosDestacados {
+.productosGlobales {
     width: 80%; 
     display: flex;
     flex-direction: column;
@@ -39,22 +41,28 @@
 
 .todosProductos {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    width: 80%;
+    margin: 40px 10px 10px 10px;
 }
 
 .producto {
-    width: 30%;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30%; 
+    height: 250px; 
     background-color: white;
     padding: 15px;
     border-radius: 10px;
-    text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
+    margin: 10px ;
 }
 
 .producto>p{
@@ -71,7 +79,7 @@
 .producto img {
     width: 100%;
     max-width: 140px;
-    height: auto;
+    height: 30%;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out; 
     cursor: pointer;
@@ -140,10 +148,12 @@ button:hover {
 
 .pedido button {
     width: 50%;
+    height: 80px;
     background-color: #28A745;
     font-size: 18px;
     padding: 15px;
     margin: 2%;
+    align-items: center;
 }
 
 .pedido button:hover {
@@ -151,15 +161,17 @@ button:hover {
 }
 
 
-
 .btnPedidoCantidad {
     display: flex; 
     justify-content: center;
     align-items: center;
-    gap: 10px; 
+    gap: 20px; 
     margin-top: 10px;
 }
 .btnPedidoCantidad button {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
     width: 40px; 
     height: 40px;
     background-color: #28A745;
@@ -167,7 +179,6 @@ button:hover {
     border-radius: 5px;
     cursor: pointer;
     border: none;
-    text-align: center;
 }
 .btnPedidoCantidad button:hover {
     background-color: #1a8031;
@@ -178,6 +189,7 @@ button:hover {
     justify-content: center;
     align-items: center;
 }
+
 
 .btnConfirmarPedido{
     display: flex;
