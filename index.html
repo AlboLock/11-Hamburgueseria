@@ -13,46 +13,77 @@
 
 <body>
     <div class="principal">
-        <div class="productosDestacados">
-            <h1>Productos Destacados</h1>
-            <div class="todosProductos">
 
-                <div class="producto">
-                    <img src="media/burger.png">
-                    <h3>The Luck Burger</h3>
-                    <div class="descripcion">
-                        <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, bacon crujiente, cebolla morada y nuestra salsa Lucchetti.</p>
-                    </div>
-                    <p>Precio: 8.95 €</p>
-                    <button onclick="abrirVentanaModificar()">+</button>
-                </div>
-        
-        
-                <div class="producto">
-                    <img src="media/perrito.png">
-                    <h3>Hot Dog Rivas</h3>
-                    <div class="descripcion">
-                        <p>Salchicha Frankfurt premium, bañada en queso manchego derretido, crujientes cebollitas fritas, y nuestra exclusiva salsa Manu's BBQ.</p>
-                    </div>
-                    <p>Precio: 5.95 €</p>
-                    <button onclick="abrirVentanaModificar()">+</button>
+        <div class="productosDestacadosYPedido">
 
-                    
-
-                </div>
-        
-                <div class="producto">
-                    <img src="media/bocadillo.png">
-                    <h3>Panino Lucchetti Speciale</h3>
-                    <div class="descripcion">
-                        <p>Crujiente pan italiano relleno con finas láminas de pollo marinadas al pesto, mozzarella fresca fundida, rúcula, tomate seco y un toque de alioli artesano al estilo Cattolica.</p>
+            <div class="productosDestacados">
+                <h1>Productos Destacados</h1>
+                <div class="todosProductos">
+                    <div class="producto">
+                        <img src="media/burger.png">
+                        <h3>The Luck Burger</h3>
+                        <div class="descripcion">
+                            <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, bacon crujiente, cebolla morada y nuestra salsa Lucchetti.</p>
+                        </div>
+                        <p>Precio: 8.95 €</p>
+                        <button onclick="abrirVentanaModificar()">+</button>
                     </div>
-                    <p>Precio: 7.95 €</p>
-                    <button onclick="abrirVentanaModificar()">+</button>
+            
+            
+                    <div class="producto">
+                        <img src="media/perrito.png">
+                        <h3>Hot Dog Rivas</h3>
+                        <div class="descripcion">
+                            <p>Salchicha Frankfurt premium, bañada en queso manchego derretido, crujientes cebollitas fritas, y nuestra exclusiva salsa Manu's BBQ.</p>
+                        </div>
+                        <p>Precio: 5.95 €</p>
+                        <button onclick="abrirVentanaModificar()">+</button>
+                    </div>
+            
+                    <div class="producto">
+                        <img src="media/bocadillo.png">
+                        <h3>Panino Lucchetti Speciale</h3>
+                        <div class="descripcion">
+                            <p>Crujiente pan italiano relleno con finas láminas de pollo marinadas al pesto, mozzarella fresca fundida, rúcula, tomate seco y un toque de alioli artesano al estilo Cattolica.</p>
+                        </div>
+                        <p>Precio: 7.95 €</p>
+                        <button onclick="abrirVentanaModificar()">+</button>
+                    </div>
                 </div>
-        
+            </div>
+            <div class="pedido">
+                <h2>Mi Pedido</h2>
+                <p><strong>Número de pedido:</strong> #01</p>
+    
+                <h3>Producto Seleccionado:</h3>
+                <p><strong>Nombre:</strong> The Luck Burger</p>
+                <p><strong>Cocción:</strong> Al punto</p>
+                <p><strong>Extras:</strong> Bacon, cebolla caramelizada</p>
+                <p><strong>Bebida:</strong> Coca-Cola Zero</p>
+    
+                
+                <h3>Cantidad:</h3>
+                <div class="btnPedidoCantidad">
+                    <button>-</button>
+                    <span>1</span>
+                    <button>+</button>
+                </div>
+                
+                <h3>Tipo de entrega:</h3>
+                <div class="btnTipoEntrega">
+                    <button>Entrega a domicilio</button>
+                    <button>Recoger en el local</button>    
+                </div>
+    
+                <h3>Total del pedido:</h3>
+                <div class="btnConfirmarPedido">
+                    <p><strong>8.95 € </strong></p>
+                    <button>Confirmar Pedido</button>
+                </div>
             </div>
         </div>
+        </div>
+            
     
 
         <div class="pedidosEnProceso">
@@ -66,39 +97,6 @@
             </div>
         </div>
 
-
-
-        <div class="pedido">
-            <h2>Mi Pedido</h2>
-            <p><strong>Número de pedido:</strong> #01</p>
-
-            <h3>Producto Seleccionado:</h3>
-            <p><strong>Nombre:</strong> The Luck Burger</p>
-            <p><strong>Cocción:</strong> Al punto</p>
-            <p><strong>Extras:</strong> Bacon, cebolla caramelizada</p>
-            <p><strong>Bebida:</strong> Coca-Cola Zero</p>
-
-            
-            <h3>Cantidad:</h3>
-            <div class="btnPedidoCantidad">
-                <button>-</button>
-                <span>1</span>
-                <button>+</button>
-            </div>
-            
-            <h3>Tipo de entrega:</h3>
-            <div class="btnTipoEntrega">
-                <button>Entrega a domicilio</button>
-                <button>Recoger en el local</button>    
-            </div>
-
-            <h3>Total del pedido:</h3>
-            <div class="btnConfirmarPedido">
-                <p><strong>8.95 € </strong></p>
-                <button>Confirmar Pedido</button>
-            </div>
-        </div>
-    </div>
 <!-- -------------------------Ventana modificar pedido---------------------------- -->
     <div id="modifyWindow">
         <div id="modify-panel">

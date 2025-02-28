@@ -14,8 +14,20 @@
     padding: 20px;
 }
 
+.productosDestacadosYPedido {
+    display: flex;
+    width: 100%;
+}
+.pedido {
+    width: 20%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .productosDestacados {
-    width: 45%; 
+    width: 80%; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,8 +99,8 @@
 }
 
 
-.pedidosEnProceso, .pedido {
-    width: 27.5%;
+.pedidosEnProceso {
+    max-width: 100%;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -177,12 +189,15 @@ button:hover {
 
 
 .pedidoDisplay {
-    background-color: #ffffff;
+    background-color: white;
     padding: 15px;
     margin-top: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     text-align: center;
+}
+.pedidoDisplay button{
+    margin-top: 2%;
 }
 
 
