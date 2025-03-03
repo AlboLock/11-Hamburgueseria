@@ -89,7 +89,15 @@ function pintarVentanaModificar(comida){
     document.getElementById('numeroMayo').innerHTML = numeroExtras(comida, 'Mayonesa especial');
 
     fillExtrasList(comida);
-    document.getElementById('confirmarPedido').setAttribute('onclick', `anadirACarrito(${comida})`);
+    document.getElementById('confirmarPedido').onclick = function () {anadirACarrito(comida);};
+}
+
+function anadirACarrito(comida){
+    if (!pedidos[pedidoCurriente]){
+        pedidos[pedidoCurriente] = [];
+    }
+    pedidos[pedidoCurriente].push(comida);
+    document.getElementById('modifyWindow').style.display = 'none';
 }
 
 function numeroExtras(comida, extra){
