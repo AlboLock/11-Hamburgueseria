@@ -184,36 +184,6 @@ button:hover {
 }
 
 
-.btnPedidoCantidad {
-    display: flex; 
-    justify-content: center;
-    align-items: center;
-    gap: 20px; 
-    margin-top: 10px;
-}
-.btnPedidoCantidad button {
-    display: flex;
-    align-items: center; 
-    justify-content: center;
-    width: 40px; 
-    height: 40px;
-    background-color: #28A745;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-}
-.btnPedidoCantidad button:hover {
-    background-color: #1a8031;
-}
-
-.btnTipoEntrega {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 .btnConfirmarPedido{
     display: flex;
     flex-direction: column;
@@ -221,7 +191,6 @@ button:hover {
     align-items: center;
 
 }
-
 
 .pedidoDisplay {
     background-color: white;
@@ -481,3 +450,32 @@ li span{
 }
 
 /* ---------------- +++ FIN +++ Ventana modificar pedido -------------------------------- */
+
+
+
+.itemPedido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.miniaturaProducto {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.iconoEliminar {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.iconoEliminar:hover {
+    transform: scale(1.2);
+}
