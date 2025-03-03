@@ -1,5 +1,5 @@
 let pedidos = [];
-let pedidoCurriente = 0;
+let pedidoEnCurso = 0;
 
 function Comida(tipo, nombre, precioBase, ingredientesBase){
     this.tipo = tipo;
@@ -9,6 +9,7 @@ function Comida(tipo, nombre, precioBase, ingredientesBase){
     this.ingredientesBase = ingredientesBase;
     this.ingredientesExtra = [];
     this.complementos = [];
+    this.bebidas = [];
     this.anadirExtra = function(ingrediente){
                             this.ingredientesExtra.push(ingrediente);
                             this.precioTotal += 0.5
@@ -54,6 +55,7 @@ function toggleExtras(idExpandable, header) {
 }
 
 function pintarVentanaModificar(comida){
+    pedidoEnCurso = comida;
     document.getElementById('modifyWindow').style.display = 'flex';
     document.getElementById('modificarImg').src = `media/${comida.nombre}.png`;
     document.getElementById('modificarNombre').innerHTML = `${comida.nombre }`;
@@ -110,4 +112,70 @@ function fillExtrasList(comida){
         precioExtras += 0.5;
     }
     document.getElementById('precioTotalExtras').innerHTML = `<div>Total: ${precioExtras.toFixed(2)} €</div>`
+}
+
+
+// Constructores Complementos y Bebidas
+
+function Complemento(nombre, precio) {
+    this.nombre = nombre;
+    this.precio = precio;
+}
+
+function Bebida(nombre, precio) {
+    this.nombre = nombre;
+    this.precio = precio;
+}
+
+const preciosComplementos = {
+    "Fresh & Fit Salad": 1.50,
+    "Crunchy Fries": 2.00,
+    "Onion Gold Rings": 2.50
+};
+
+const preciosBebidas = {
+    "H2O Premium": 1.00,
+    "Heineken Ice Gold Sin Alcohol": 2.00,
+    "Soft Drinks Selection": 1.50
+};
+
+
+// Añadir y quitar complementos 
+
+function anadirComplemento(complemento) {
+    let precio = preciosComplementos[complemento];  // Busca el precio en el objeto
+    let nuevoComplemento = new Complemento(complemento, precio);
+    pedidoEnCurso.complementos.push(nuevoComplemento);
+    pedidoEnCurso.precioTotal += precio;
+    
+}
+
+function quitarComplemento(complemento) {
+    for (let i = 0; i < pedidoEnCurso.complementos.length; i++) {
+        if (pedidoEnCurso.complementos[i].nombre === complemento) {
+            pedidoEnCurso.precioTotal -= pedidoEnCurso.complementos[i].precio;
+            pedidoEnCurso.complementos.splice(i, 1);
+            
+        }
+    }
+}
+
+// Añadir y quitar bebidas
+
+function anadirBebida(bebida) {
+    let precio = preciosBebidas[bebida];  // Busca el precio en el objeto
+    let nuevaBebida = new Bebida(bebida, precio);
+    pedidoEnCurso.bebidas.push(nuevaBebida);
+    pedidoEnCurso.precioTotal += precio;
+    a
+}
+
+function quitarBebida(bebida) {
+    for (let i = 0; i < pedidoEnCurso.bebidas.length; i++) {
+        if (pedidoEnCurso.bebidas[i].nombre === bebida) {
+            pedidoEnCurso.precioTotal -= pedidoEnCurso.bebidas[i].precio;
+            pedidoEnCurso.bebidas.splice(i, 1);
+            
+        }
+    }
 }
