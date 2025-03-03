@@ -30,3 +30,4 @@ function toggleExtras(idExpandable, header) {
 function abrirVentanaModificar(){
     document.getElementById('modifyWindow').style.display = 'flex';
 }
+
