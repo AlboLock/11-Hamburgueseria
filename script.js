@@ -5,21 +5,19 @@ function Comida(tipo, nombre, precioBase, ingredientesBase){
     this.tipo = tipo;
     this.nombre = nombre;
     this.precioBase = precioBase;
-    this.precioTotal = precioBase;
+    this.precio = precioBase;
     this.ingredientesBase = ingredientesBase;
     this.ingredientesExtra = [];
-    this.complementos = [];
-    this.bebidas = [];
     this.anadirExtra = function(ingrediente){
                             this.ingredientesExtra.push(ingrediente);
-                            this.precioTotal += 0.5
+                            this.precio += 0.5
                             pintarVentanaModificar(this);
                         }
     this.quitarExtra = function(ingrediente){
                             let index = this.ingredientesExtra.indexOf(ingrediente);
                             if (index != -1) {
                                 this.ingredientesExtra.splice(index, 1);
-                                this.precioTotal -= 0.5
+                                this.precio -= 0.5
                                 pintarVentanaModificar(this);
                             }
                         }
@@ -55,14 +53,13 @@ function toggleExtras(idExpandable, header) {
 }
 
 function pintarVentanaModificar(comida){
-    pedidoEnCurso = comida;
     document.getElementById('modifyWindow').style.display = 'flex';
     document.getElementById('modificarImg').src = `media/${comida.nombre}.png`;
     document.getElementById('modificarNombre').innerHTML = `${comida.nombre }`;
     document.getElementById('modificarIngBase').innerHTML = `Ingredientes: ${comida.ingredientesBase.join(', ') }`;
     document.getElementById('detailsNombre').innerHTML = `${comida.nombre }`;
     document.getElementById('detailsPrecioBase').innerHTML = `${comida.precioBase.toFixed(2)} €`;
-    document.getElementById('precioTotalPedido').innerHTML = `${comida.precioTotal.toFixed(2)} €`;
+    document.getElementById('precioTotalPedido').innerHTML = `${comida.precio.toFixed(2)} €`;
 
     // Quitar extra
     document.getElementById('quitarExtraBacon').setAttribute('onclick', `${comida.tipo}.quitarExtra('Bacon')`);
@@ -93,11 +90,13 @@ function pintarVentanaModificar(comida){
 }
 
 function anadirACarrito(comida){
-    if (!pedidos[pedidoCurriente]){
-        pedidos[pedidoCurriente] = [];
+    if (!pedidos[pedidoEnCurso]){
+        pedidos[pedidoEnCurso] = [];
     }
-    pedidos[pedidoCurriente].push(comida);
+    pedidos[pedidoEnCurso].push(comida);
     document.getElementById('modifyWindow').style.display = 'none';
+    calcularPrecioTotalPedido();
+    console.log(pedidos)
 }
 
 function numeroExtras(comida, extra){
@@ -153,8 +152,13 @@ const preciosBebidas = {
 function anadirComplemento(complemento) {
     let precio = preciosComplementos[complemento];  // Busca el precio en el objeto
     let nuevoComplemento = new Complemento(complemento, precio);
-    pedidoEnCurso.complementos.push(nuevoComplemento);
-    pedidoEnCurso.precioTotal += precio;
+    if (!pedidos[pedidoEnCurso]) {
+        pedidos[pedidoEnCurso] = [];
+    }
+    pedidos[pedidoEnCurso].push(nuevoComplemento);
+    console.log(pedidos)
+    calcularPrecioTotalPedido();
+    //pedidoEnCurso.precioTotal += precio;
     
 }
 
@@ -163,7 +167,6 @@ function quitarComplemento(complemento) {
         if (pedidoEnCurso.complementos[i].nombre === complemento) {
             pedidoEnCurso.precioTotal -= pedidoEnCurso.complementos[i].precio;
             pedidoEnCurso.complementos.splice(i, 1);
-            
         }
     }
 }
@@ -173,9 +176,12 @@ function quitarComplemento(complemento) {
 function anadirBebida(bebida) {
     let precio = preciosBebidas[bebida];  // Busca el precio en el objeto
     let nuevaBebida = new Bebida(bebida, precio);
-    pedidoEnCurso.bebidas.push(nuevaBebida);
-    pedidoEnCurso.precioTotal += precio;
-    a
+    if (!pedidos[pedidoEnCurso]) {
+        pedidos[pedidoEnCurso] = [];
+    }
+    pedidos[pedidoEnCurso].push(nuevaBebida);
+    calcularPrecioTotalPedido();
+    console.log(pedidos)
 }
 
 function quitarBebida(bebida) {
@@ -183,7 +189,14 @@ function quitarBebida(bebida) {
         if (pedidoEnCurso.bebidas[i].nombre === bebida) {
             pedidoEnCurso.precioTotal -= pedidoEnCurso.bebidas[i].precio;
             pedidoEnCurso.bebidas.splice(i, 1);
-            
         }
     }
+}
+
+function calcularPrecioTotalPedido(){
+    let precioTotal = 0;
+    for (let i = 0; i < pedidos[pedidoEnCurso].length; i++) {
+        precioTotal += pedidos[pedidoEnCurso][i].precio;
+    }
+    document.getElementById('precioPedidoTotal').innerHTML = `<strong>${precioTotal} € </strong>`;
 }
