@@ -20,7 +20,7 @@
                 <h1>Productos Destacados</h1>
                 <div class="todosProductos">
                     <div class="producto">
-                        <img src="media/TheLuckBurger.png">
+                        <img src="media/burger.png">
                         <h3>The Luck Burger</h3>
                         <div class="descripcion">
                             <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, tomate en rodajas  y nuestra salsa Lucchetti.</p>
@@ -31,7 +31,7 @@
             
             
                     <div class="producto">
-                        <img src="media/HotDogRivas.png">
+                        <img src="media/perrito.png">
                         <h3>Hot Dog Rivas</h3>
                         <div class="descripcion">
                             <p>Salchicha Frankfurt premium, bañada en queso manchego derretido, mostaza de dijón y nuestra exclusiva salsa Manu's kétchup.</p>
@@ -41,7 +41,7 @@
                     </div>
             
                     <div class="producto">
-                        <img src="media/PaninoSpeciale.png">
+                        <img src="media/bocadillo.png">
                         <h3>Panino Speciale</h3>
                         <div class="descripcion">
                             <p>Crujiente pan italiano relleno con finas láminas de jamón serrano, mozzarella fresca fundida, rúcula, tomate seco y un toque de alioli artesano al estilo Cattolica.</p>
@@ -55,33 +55,33 @@
 
                 <div class="todosProductos">
                     <div class="producto">
-                        <img src="media/Fresh&FitSalad.png">
+                        <img src="media/ensalada.png">
                         <h3>Fresh & Fit Salad</h3>
                         <div class="descripcion">
                             <p>Una combinación de lechuga crujiente, tomate, zanahoria y aliño especial. Ligera, saludable y llena de sabor.</p>
                         </div>
                         <p>Precio: 1.50 €</p>
-                        <button onclick="anadirComplemento('Fresh & Fit Salad')">+</button>
+                        <button onclick="anadirComplemento('ensalada', 'Fresh & Fit Salad')">+</button>
                     </div>
                                 
                     <div class="producto">
-                        <img src="media/CrunchyFries.png">
+                        <img src="media/patatas.png">
                         <h3>Crunchy Fries</h3>
                         <div class="descripcion">
                             <p>Patatas fritas doradas, crujientes por fuera y suaves por dentro. ¡Perfectas para dipear con nuestras salsas exclusivas!</p>
                         </div>
                         <p>Precio: 2.00 €</p>
-                        <button onclick="anadirComplemento('Crunchy Fries')">+</button>
+                        <button onclick="anadirComplemento('patatas', 'Crunchy Fries')">+</button>
                     </div>
             
                     <div class="producto">
-                        <img src="media/OnionGoldRings.png">
+                        <img src="media/arosCebolla.png">
                         <h3>Onion Gold Rings</h3>
                         <div class="descripcion">
                             <p>Aros de cebolla extra crujientes, dorados a la perfección y servidos con tu salsa favorita. ¡Un bocado irresistible!.</p>
                         </div>
                         <p>Precio: 2.50 €</p>
-                        <button onclick="anadirComplemento('Onion Gold Rings')">+</button>
+                        <button onclick="anadirComplemento('arosCebolla', 'Onion Gold Rings')">+</button>
                     </div>                   
                 </div>
 
@@ -89,38 +89,38 @@
 
                 <div class="todosProductos">
                     <div class="producto">
-                        <img src="media/H2OPremium.png">
+                        <img src="media/agua.png">
                         <h3>H2O Premium</h3>
                         <div class="descripcion">
                             <p>Agua mineral natural, ultra refrescante y pura, perfecta para acompañar cualquier comida y mantenerte hidratado.</p>
                         </div>
                         <p>Precio: 1.00 €</p>
-                        <button onclick="anadirBebida('H2O Premium')">+</button>
+                        <button onclick="anadirBebida('agua', 'H2O Premium')">+</button>
                     </div>
         
                     <div class="producto">
-                        <img src="media/HeinekenIceGoldSinAlcohol.png">
+                        <img src="media/cerveza.png">
                         <h3>Heineken Ice Gold Sin Alcohol</h3>
                         <div class="descripcion">
                             <p>La icónica Heineken servida bien fría, con su sabor equilibrado y burbujeante. ¡El maridaje perfecto para tu menú!</p>
                         </div>
                         <p>Precio: 2.00 €</p>
-                        <button onclick="anadirBebida('Heineken Ice Gold Sin Alcohol')">+</button>
+                        <button onclick="anadirBebida('cerveza', 'Heineken Ice Gold Sin Alcohol')">+</button>
                     </div>
             
                     <div class="producto">
-                        <img src="media/SoftDrinksSelection.png">
+                        <img src="media/refrescos.png">
                         <h3>Soft Drinks Selection</h3>
                         <div class="descripcion">
                             <p>Disfruta de nuestra selección de refrescos premium: Coca-Cola, Fanta, Sprite y más. Con y sin azúcar, ¡elige tu favorito!</p>
                         </div>
                         <p>Precio: 1.50 €</p>
-                        <button onclick="anadirBebida('Soft Drinks Selection')">+</button>
+                        <button onclick="anadirBebida('refrescos', 'Soft Drinks Selection')">+</button>
                     </div>                   
                 </div>
             </div>
             <div class="pedido">
-                <img id="logoEmpresa" src="media/logoRivas&LuckBurguer.png">
+                <img id="logoEmpresa" src="media/logoRivas&Luck.png">
                 <p id="mensajeBienvenida">Bienvenido a "Rivas & Luck Burgers"</p>
                 <p id="mensajeHacerPedido">Haga su pedido</p>
             
@@ -130,8 +130,8 @@
             
                     <h3>Total del pedido:</h3>
                     <div class="btnConfirmarPedido">
-                        <p><strong id="precioPedidoTotal">0.00 €</strong></p>
-                        <button onclick="confirmarPedido()">Confirmar Pedido</button>
+                        <p id="precioPedidoTotal"><strong>0 € </strong></p>
+                        <button onclick="terminarPedido()">Confirmar Pedido</button>
                     </div>
                 </div>
             </div>
@@ -141,14 +141,31 @@
             
     
 
-        <div class="pedidosEnProceso">
-            <h2>Pedidos en proceso</h2>
-            <div class="pedidoDisplay">
-                <p><strong>Pedido #01</strong></p>
-                <p>Producto: The Luck Burger</p>
-                <p>Estado: Realizado</p>
-                <p>Tiempo restante: 1 minuto</p>
-                <button>Recoger pedido</button>
+        <!-- -------------------------Display pedidos---------------------------- -->
+        
+        <div class="pedidos-confirmados">
+            <div class="pedidosRealizados">
+                <h2>Pedidos realizados</h2>
+                <div id="listaPedidosRealizados">
+                </div>
+            </div>
+            <div class="pedidosEnProceso">
+                <h2>Pedidos en proceso</h2>
+                <div class="pedidoDisplay">
+                    <p><strong>Pedido #01</strong></p>
+                    <p>Producto: The Luck Burger</p>
+                    <p>Estado: En proceso</p>
+                    <p>Tiempo restante: 1 minuto</p>
+                </div>
+            </div>
+            <div class="pedidosListos">
+                <h2>Pedidos listos para recoger</h2>
+                <div class="pedidoDisplay">
+                    <p><strong>Pedido #01</strong></p>
+                    <p>Producto: The Luck Burger</p>
+                    <p>Estado: Listo para recoger</p>
+                    <button>Recoger pedido</button>
+                </div>
             </div>
         </div>
 
@@ -230,4 +247,4 @@
 <!-- ------------------------- +++ FIN +++ Ventana modificar pedido---------------------------- -->
 <script src="script.js"></script>
 </body>
-</html>voy para alla?
+</html>

@@ -479,3 +479,18 @@ li span{
 .iconoEliminar:hover {
     transform: scale(1.2);
 }
+
+/*-----------------------Display Pedidos---------------------------*/
+.pedidos-confirmados{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.pedidos-confirmados>div {
+    max-width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
