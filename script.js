@@ -1,6 +1,8 @@
-function Comida(nombre, precio, ingredientes){
+
+function Comida(nombre, precio,imagen, ingredientes){
     this.nombre = nombre;
     this.precio = precio;
+    this.imagen = imagen;
     this.ingredientes = ingredientes;
 }
 
@@ -27,7 +29,7 @@ function toggleExtras(idExpandable, header) {
         expandable.style.height = null;
 }
 
-function abrirVentanaModificar(){
+function abrirVentanaModificar(producto){
     document.getElementById('modifyWindow').style.display = 'flex';
 }
 
