@@ -53,6 +53,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 30%; 
     height: 250px; 
     background-color: white;
@@ -68,6 +69,11 @@
 .producto>p{
     margin-bottom: 1rem;
 }
+.producto h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px; 
+}
 
 .producto:hover {
     width: 40%;
@@ -79,15 +85,32 @@
 .producto img {
     width: 100%;
     max-width: 140px;
-    height: 30%;
+    height: auto;
     border-radius: 10px;
     transition: transform 0.3s ease-in-out; 
     cursor: pointer;
+    margin-top: 10px;
 }
 
 
 .producto img:hover {
     transform: scale(1.1);
+}
+.producto button {
+    background-color: #D62300;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 30px; 
 }
 
 .descripcion {
