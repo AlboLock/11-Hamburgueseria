@@ -20,34 +20,34 @@
                 <h1>Productos Destacados</h1>
                 <div class="todosProductos">
                     <div class="producto">
-                        <img src="media/burger.png">
+                        <img src="media/The Luck Burger.png">
                         <h3>The Luck Burger</h3>
                         <div class="descripcion">
                             <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, bacon crujiente, cebolla morada y nuestra salsa Lucchetti.</p>
                         </div>
-                        <p>Precio: 8.95 €</p>
-                        <button onclick="abrirVentanaModificar(); anadirComida('burger')">+</button>
+                        <p>Precio: 5.00 €</p>
+                        <button onclick="anadirComida('burger')">+</button>
                     </div>
             
             
                     <div class="producto">
-                        <img src="media/perrito.png">
+                        <img src="media/Hot Dog Rivas.png">
                         <h3>Hot Dog Rivas</h3>
                         <div class="descripcion">
                             <p>Salchicha Frankfurt premium, bañada en queso manchego derretido, crujientes cebollitas fritas, y nuestra exclusiva salsa Manu's BBQ.</p>
                         </div>
-                        <p>Precio: 5.95 €</p>
-                        <button onclick="abrirVentanaModificar(); anadirComida('perritoCaliente')">+</button>
+                        <p>Precio: 3.50 €</p>
+                        <button onclick="anadirComida('perrito')">+</button>
                     </div>
             
                     <div class="producto">
-                        <img src="media/bocadillo.png">
+                        <img src="media/Panino Lucchetti Speciale.png">
                         <h3>Panino Lucchetti Speciale</h3>
                         <div class="descripcion">
                             <p>Crujiente pan italiano relleno con finas láminas de pollo marinadas al pesto, mozzarella fresca fundida, rúcula, tomate seco y un toque de alioli artesano al estilo Cattolica.</p>
                         </div>
-                        <p>Precio: 7.95 €</p>
-                        <button onclick="abrirVentanaModificar(); anadirComida('bocadillo')">+</button>
+                        <p>Precio: 4.00 €</p>
+                        <button onclick="anadirComida('bocadillo')">+</button>
                     </div>                    
                 </div>
 
@@ -170,95 +170,56 @@
         <div id="modify-panel">
             <div id="closeButton"><img onclick="document.getElementById('modifyWindow').style.display = 'none'" src="media/close-icon.png" alt=""></div>
             <div class="col2">
-                <img src="media/burger.png" alt="">
+                <img id="modificarImg" src="media/burger.png" alt="">
             </div>
             <div class="col2 right">
                 <div class="rowSmall top">
-                    <h3>The Luck Burger</h3>
-                    <p>Ingredientes: Pan, Carne, Lechuga, Tomate, Queso</p>
+                    <h3 id="modificarNombre">The Luck Burger</h3>
+                    <p id="modificarIngBase">Ingredientes: Pan, Carne, Lechuga, Tomate, Queso</p>
                 </div>
                 <div class="rowBig">
                     <div id="extras" class="expandableHeader" onclick="toggleExtras('extrasExpandable', this)">Extras</div>
                     <div id="extrasExpandable" class="expandable">
                         <div>
                             <div><span>Bacon</span></div>
-                            <div class="extraPricePanel"><span>0.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
+                            <div class="extraPricePanel"><span>0.50 €</span><span id="quitarExtraBacon">-</span><span
+                                    class="quantity" id='numeroBacon'>0</span><span id="anadirExtraBacon">+</span></span></div>
                         </div>
                         <div>
                             <div><span>Cebolla caramelizada</span></div>
-                            <div class="extraPricePanel"><span>0.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
+                            <div class="extraPricePanel"><span>0.50 €</span><span id="quitarExtraCebolla">-</span><span
+                                    class="quantity" id='numeroCebolla'>0</span><span id="anadirExtraCebolla">+</span></span></div>
                         </div>
                         <div>
                             <div><span>Huevo frito</span></div>
-                            <div class="extraPricePanel"><span>0.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
+                            <div class="extraPricePanel"><span>0.50 €</span><span id="quitarExtraHuevo">-</span><span
+                                    class="quantity" id='numeroHuevo'>0</span><span id="anadirExtraHuevo">+</span></span></div>
                         </div>
                         <div>
                             <div><span>Champiñones</span></div>
-                            <div class="extraPricePanel"><span>0.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
+                            <div class="extraPricePanel"><span>0.50 €</span><span id="quitarExtraChampi">-</span><span
+                                    class="quantity" id='numeroChampi'>0</span><span id="anadirExtraChampi">+</span></span></div>
                         </div>
                         <div>
                             <div><span>Jalapeños</span></div>
-                            <div class="extraPricePanel"><span>0.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
+                            <div class="extraPricePanel"><span>0.50 €</span><span id="quitarExtraJalap">-</span><span
+                                    class="quantity" id='numeroJalap'>0</span><span id="anadirExtraJalap">+</span></span></div>
                         </div>
                         <div>
                             <div><span>Mayonesa especial</span></div>
-                            <div class="extraPricePanel"><span>0.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
-                        </div>
-
-                    </div>
-                    <div id="complementos" class="expandableHeader" onclick="toggleExtras('complementosExpandable', this)">
-                        Complementos</div>
-                    <div id="complementosExpandable" class="expandable">
-                        <div>
-                            <div><span>Patatas fritas</span></div>
-                            <div class="extraPricePanel"><span>2.00 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
-                        </div>
-                        <div>
-                            <div><span>Ensalada</span></div>
-                            <div class="extraPricePanel"><span>1.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
-                        </div>
-                        <div>
-                            <div><span>Aros de cebolla</span></div>
-                            <div class="extraPricePanel"><span>2.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
-                        </div>
-                    </div>
-                    <div id="bebidas" class="expandableHeader" onclick="toggleExtras('bebidasExpandable', this)">Bebidas
-                    </div>
-                    <div id="bebidasExpandable" class="expandable">
-                        <div>
-                            <div><span>Agua</span></div>
-                            <div class="extraPricePanel"><span>1.00 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
-                        </div>
-                        <div>
-                            <div><span>Refresco</span></div>
-                            <div class="extraPricePanel"><span>1.50 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
-                        </div>
-                        <div>
-                            <div><span>Cerveza sin alcohol</span></div>
-                            <div class="extraPricePanel"><span>2.00 €</span><span>-</span><span
-                                    class="quantity">0</span><span>+</span></span></div>
+                            <div class="extraPricePanel"><span>0.50 €</span><span id="quitarExtraMayo">-</span><span
+                                    class="quantity" id='numeroMayo'>0</span><span id="anadirExtraMayo">+</span></span></div>
                         </div>
                     </div>
                 </div>
                 <div class="rowDetails">
                     <div>
-                        <h4>The Luck Burger</h4>
-                        <p>5.00 €</p>
+                        <h4 id="detailsNombre">The Luck Burger</h4>
+                        <p id="detailsPrecioBase">5.00 €</p>
                     </div>
                     <div>
                         <h4>Extras</h4>
-                        <div class="extrasList">
+                        <div id="ulExtras" class="extrasList">
                             <ul>
                                 <li>Cebolla caramelizada <span>0.50 €</span></li>
                                 <li>Champiñones <span>0.50 €</span></li>
@@ -267,48 +228,7 @@
                                 <li>Champiñones <span>0.50 €</span></li>
                             </ul>
                         </div>
-                        <div>Total: 1.00 €</div>
-                    </div>
-                    <div>
-                        <h4>Complementos</h4>
-                        <div class="extrasList">
-                            <ul>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                                <li>Patatas fritas <span>2.00 €</span></li>
-                            </ul>
-                        </div>
-                        <div>Total: 2.00 €</div>
-                    </div>
-                    <div>
-                        <h4>Bebidas</h4>
-                        <div class="extrasList">
-                            <ul>
-                                <li>Agua <span>1.00 €</span></li>
-                                <li>Agua <span>1.00 €</span></li>
-                                <li>Agua <span>1.00 €</span></li>
-                                <li>Agua <span>1.00 €</span></li>
-                                <li>Agua <span>1.00 €</span></li>
-                                <li>Agua <span>1.00 €</span></li>
-                                <li>Agua <span>1.00 €</span></li>
-                                <li>Agua <span>1.00 €</span></li>
-                            </ul>
-                        </div>
-                        <div>Total: 1.00 €</div>
+                        <div id="precioTotalExtras">Total: 1.00 €</div>
                     </div>
                 </div>
                 <div class="rowSmall bottom">
@@ -319,7 +239,7 @@
                     </div>
                     <div id="confirmarPedido">
                         <span>Añadir al pedido</span>
-                        <span>9.00€</span>
+                        <span id="precioTotalPedido">9.00€</span>
                     </div>
                 </div>
             </div>
