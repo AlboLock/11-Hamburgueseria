@@ -1,5 +1,5 @@
 let pedidos = [];
-let pedidoEnCurso = 0;
+let numeroPedido = 0;
 
 function Comida(tipo, nombre, precioBase, ingredientesBase) {
     this.tipo = tipo;
@@ -90,10 +90,10 @@ function pintarVentanaModificar(comida) {
 }
 
 function anadirACarrito(comida) {
-    if (!pedidos[pedidoEnCurso]) {
-        pedidos[pedidoEnCurso] = [];
+    if (!pedidos[numeroPedido]) {
+        pedidos[numeroPedido] = [];
     }
-    pedidos[pedidoEnCurso].push(comida);
+    pedidos[numeroPedido].push(comida);
     document.getElementById('modifyWindow').style.display = 'none';
     calcularPrecioTotalPedido();
     actualizarPantallaPedido()
@@ -154,13 +154,13 @@ const preciosBebidas = {
 function anadirComplemento(tipo, complemento) {
     let precio = preciosComplementos[complemento];  // Busca el precio en el objeto
     let nuevoComplemento = new Complemento(tipo, complemento, precio);
-    if (!pedidos[pedidoEnCurso]) {
-        pedidos[pedidoEnCurso] = [];
+    if (!pedidos[numeroPedido]) {
+        pedidos[numeroPedido] = [];
     }
-    pedidos[pedidoEnCurso].push(nuevoComplemento);
+    pedidos[numeroPedido].push(nuevoComplemento);
     calcularPrecioTotalPedido();
     actualizarPantallaPedido();
-    //pedidoEnCurso.precioTotal += precio;
+    //numeroPedido.precioTotal += precio;
 
 }
 
@@ -169,25 +169,25 @@ function anadirComplemento(tipo, complemento) {
 function anadirBebida(tipo, bebida) {
     let precio = preciosBebidas[bebida];  // Busca el precio en el objeto
     let nuevaBebida = new Bebida(tipo, bebida, precio);
-    if (!pedidos[pedidoEnCurso]) {
-        pedidos[pedidoEnCurso] = [];
+    if (!pedidos[numeroPedido]) {
+        pedidos[numeroPedido] = [];
     }
-    pedidos[pedidoEnCurso].push(nuevaBebida);
+    pedidos[numeroPedido].push(nuevaBebida);
     calcularPrecioTotalPedido();
     actualizarPantallaPedido();
 }
 
 function calcularPrecioTotalPedido() {
     let precioTotal = 0;
-    for (let i = 0; i < pedidos[pedidoEnCurso].length; i++) {
-        precioTotal += pedidos[pedidoEnCurso][i].precio;
+    for (let i = 0; i < pedidos[numeroPedido].length; i++) {
+        precioTotal += pedidos[numeroPedido][i].precio;
     }
     document.getElementById('precioPedidoTotal').innerHTML = `<strong>${precioTotal} € </strong>`;
 }
 
 function terminarPedido() {
-    anadirAPedidoRealizado(pedidos[pedidoEnCurso], pedidoEnCurso);
-    pedidoEnCurso++;
+    anadirAPedidoRealizado(pedidos[numeroPedido], numeroPedido);
+    numeroPedido++;
     actualizarPantallaPedido();
 }
 
@@ -235,7 +235,7 @@ function actualizarPantallaPedido() {
     let mensajeHacerPedido = document.getElementById("mensajeHacerPedido");
 
     // Verificar si hay algo en el pedido
-    if (pedidos[pedidoEnCurso]) {
+    if (pedidos[numeroPedido]) {
         listaPedido.innerHTML = "";
         contenidoPedido.style.display = "block";
         logo.style.display = "none";
@@ -243,9 +243,9 @@ function actualizarPantallaPedido() {
         mensajeHacerPedido.style.display = "none";
 
         // Mostrar todas las comidas
-        for (let i = 0; i < pedidos[pedidoEnCurso].length; i++) {
-            if (pedidos[pedidoEnCurso][i].constructor.name == 'Comida'){
-                let comida = pedidos[pedidoEnCurso][i];
+        for (let i = 0; i < pedidos[numeroPedido].length; i++) {
+            if (pedidos[numeroPedido][i].constructor.name == 'Comida'){
+                let comida = pedidos[numeroPedido][i];
                 let li = document.createElement("li");
                 li.classList.add("itemPedido");
                 li.innerHTML = `
@@ -258,9 +258,9 @@ function actualizarPantallaPedido() {
         }
 
         // Mostrar complementos
-        for (let i = 0; i < pedidos[pedidoEnCurso].length; i++) {
-            if (pedidos[pedidoEnCurso][i].constructor.name == 'Complemento') {
-                let complemento = pedidos[pedidoEnCurso][i];
+        for (let i = 0; i < pedidos[numeroPedido].length; i++) {
+            if (pedidos[numeroPedido][i].constructor.name == 'Complemento') {
+                let complemento = pedidos[numeroPedido][i];
                 let li = document.createElement("li");
                 li.classList.add("itemPedido");
                 li.innerHTML = `
@@ -273,9 +273,9 @@ function actualizarPantallaPedido() {
         }
         
         // Mostrar bebidas
-        for (let i = 0; i < pedidos[pedidoEnCurso].length; i++) {
-            if (pedidos[pedidoEnCurso][i].constructor.name == 'Bebida') {
-                let bebida = pedidos[pedidoEnCurso][i];
+        for (let i = 0; i < pedidos[numeroPedido].length; i++) {
+            if (pedidos[numeroPedido][i].constructor.name == 'Bebida') {
+                let bebida = pedidos[numeroPedido][i];
                 let li = document.createElement("li");
                 li.classList.add("itemPedido");
                 li.innerHTML = `
@@ -296,21 +296,21 @@ function actualizarPantallaPedido() {
     } 
 
 // function quitarComida(indice) {
-//     pedidoEnCurso.precioTotal -= pedidoEnCurso.comida[indice].precio; 
-//     pedidoEnCurso.comida.splice(indice, 1); 
+//     numeroPedido.precioTotal -= numeroPedido.comida[indice].precio; 
+//     numeroPedido.comida.splice(indice, 1); 
 //     actualizarPantallaPedido();
 // }
 
 
 // function quitarComplemento(indice) {
-//     pedidoEnCurso.precioTotal -= pedidoEnCurso.complementos[indice].precio;
-//     pedidoEnCurso.complementos.splice(indice, 1);
+//     numeroPedido.precioTotal -= numeroPedido.complementos[indice].precio;
+//     numeroPedido.complementos.splice(indice, 1);
 //     actualizarPantallaPedido();
 // }
 
 // function quitarBebida(indice) {
-//     pedidoEnCurso.precioTotal -= pedidoEnCurso.bebidas[indice].precio;
-//     pedidoEnCurso.bebidas.splice(indice, 1);
+//     numeroPedido.precioTotal -= numeroPedido.bebidas[indice].precio;
+//     numeroPedido.bebidas.splice(indice, 1);
 //     actualizarPantallaPedido();
 // }
 
