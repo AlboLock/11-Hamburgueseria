@@ -182,7 +182,7 @@ function calcularPrecioTotalPedido() {
     for (let i = 0; i < pedidos[numeroPedido].length; i++) {
         precioTotal += pedidos[numeroPedido][i].precio;
     }
-    document.getElementById('precioPedidoTotal').innerHTML = `<strong>${precioTotal} € </strong>`;
+    document.getElementById('precioPedidoTotal').innerHTML = `<strong>${precioTotal.toFixed(2)} € </strong>`;
 }
 
 function terminarPedido() {
