@@ -1,6 +1,32 @@
 let pedidos = [];
 let numeroPedido = 0;
 
+window.onload = function () {
+    pedidos = JSON.parse(localStorage.getItem('pedidos'));
+    numeroPedido = localStorage.getItem('numeroPedido')
+    if (pedidos == null){
+        pedidos = [];
+        numeroPedido = 0;
+    } else {
+        for (let i=0; i<pedidos.length; i++){
+            for (let j = 0; j < pedidos[i].length; j++) {
+                let item = pedidos[i][j];
+                if (item.tipo == 'burger' || item.tipo == 'perrito' || item.tipo == 'bocadillo') {
+                    Object.setPrototypeOf(item, Comida.prototype);
+                }
+                if (item.tipo == 'ensalada' || item.tipo == 'patatas' || item.tipo == 'arosCebolla') {
+                    Object.setPrototypeOf(item, Complemento.prototype);
+                }
+                if (item.tipo == 'agua' || item.tipo == 'cerveza' || item.tipo == 'refrescos') {
+                    Object.setPrototypeOf(item, Bebida.prototype);
+                }
+            }
+            anadirAPedidoRealizado(pedidos[i], i);
+        }
+        
+    }
+}
+
 function Comida(tipo, nombre, precioBase, ingredientesBase) {
     this.tipo = tipo;
     this.nombre = nombre;
@@ -53,6 +79,7 @@ function toggleExtras(idExpandable, header) {
 }
 
 function pintarVentanaModificar(comida) {
+    document.body.style.overflow = 'hidden';
     document.getElementById('modifyWindow').style.display = 'flex';
     document.getElementById('modificarImg').src = `media/${comida.tipo}.png`;
     document.getElementById('modificarNombre').innerHTML = `${comida.nombre}`;
@@ -95,6 +122,7 @@ function anadirACarrito(comida) {
     }
     pedidos[numeroPedido].push(comida);
     document.getElementById('modifyWindow').style.display = 'none';
+    document.body.style.overflow = 'auto';
     calcularPrecioTotalPedido();
     actualizarPantallaPedido()
 }
@@ -188,6 +216,8 @@ function calcularPrecioTotalPedido() {
 function terminarPedido() {
     anadirAPedidoRealizado(pedidos[numeroPedido], numeroPedido);
     numeroPedido++;
+    localStorage.setItem('pedidos', JSON.stringify(pedidos));
+    localStorage.setItem('numeroPedido', numeroPedido);
     actualizarPantallaPedido();
 }
 
@@ -201,7 +231,10 @@ function anadirAPedidoRealizado(pedido, numeroPedido) {
                                             if (pedido[i].constructor.name == 'Comida')
                                                 listaComidas.push(pedido[i].nombre);
                                         }
-                                        return listaComidas.join(', ');
+                                        if (listaComidas.length > 0)
+                                            return listaComidas.join(', ');
+                                        else
+                                            return 'N/A';
                                     }()}
                         </p>
                         <p>Complementos: ${function () {
@@ -210,7 +243,10 @@ function anadirAPedidoRealizado(pedido, numeroPedido) {
                                                 if (pedido[i].constructor.name == 'Complemento')
                                                     listaComplementos.push(pedido[i].nombre)
                                             }
-                                            return listaComplementos.join(', ');
+                                            if (listaComplementos.length > 0)
+                                                return listaComplementos.join(', ');
+                                            else
+                                                return 'N/A';
                                         }()}
                         </p>
                         <p>Bebidas: ${function () {
@@ -219,7 +255,10 @@ function anadirAPedidoRealizado(pedido, numeroPedido) {
                                             if (pedido[i].constructor.name == 'Bebida')
                                                 listaBebidas.push(pedido[i].nombre);
                                         }
-                                        return listaBebidas.join(', ');
+                                        if (listaBebidas.length > 0)
+                                            return listaBebidas.join(', ');
+                                        else
+                                            return 'N/A';
                                     }()}
                         </p>
                         <p>Estado: Realizado</p>

@@ -333,7 +333,7 @@ p strong {
 }
 
 #confirmarPedido:hover span:nth-child(2){
-    box-shadow: inset 60px 0 0 0 #3B971E;
+    box-shadow: inset 100px 0 0 0 #3B971E;
 }
 
 .rowBig{
