@@ -23,9 +23,13 @@
     flex-direction: column;
     width: 20%;
     background-color: white;
-    padding: 30px 20px 20px 20px ;
+    padding: 30px 20px 20px 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky; /* Fijar cuando se hace scroll */
+    top: 20px; /* Fijar a 20px desde la parte superior al hacer scroll */
+    height: calc(100vh - 40px); /* Ocupar casi toda la altura de la pantalla */
+    overflow-y: auto; /* Permitir scroll interno */
 }
 
 .productosGlobales {
@@ -51,11 +55,11 @@
 .producto {
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    width: 30%;
-    height: 250px;
+    width: 30%; 
+    height: 250px; 
     background-color: white;
     padding: 15px;
     border-radius: 10px;
@@ -63,16 +67,16 @@
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
-    margin: 10px;
+    margin: 10px ;
 }
 
-.producto p {
-    margin: 5px 0;
+.producto>p{
+    margin-bottom: 1rem;
 }
 .producto h3 {
     font-size: 18px;
     font-weight: bold;
-    margin: 5px 0; 
+    margin-bottom: 5px; 
 }
 
 .producto:hover {
@@ -87,9 +91,9 @@
     max-width: 140px;
     height: auto;
     border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out; 
     cursor: pointer;
-    margin: 0; 
+    margin-top: 10px;
 }
 
 
@@ -105,26 +109,30 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 40px;
     height: 40px;
-    margin: 0; 
+    margin-bottom: 30px; 
 }
 
-.producto .descripcion {
+.descripcion {
     display: none;
     opacity: 0;
     width: 100%;
     padding: 10px;
     transition: opacity 0.3s ease-in-out;
     font-size: 14px;
-    margin: 0; 
 }
 
 
 .producto:hover .descripcion {
     display: block;
     opacity: 1;
+    transform: translateY(0);
 }
+
 
 .pedidosEnProceso {
     max-width: 100%;
@@ -490,3 +498,4 @@ li span{
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
+
