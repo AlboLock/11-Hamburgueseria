@@ -7,20 +7,47 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Oswald:wght@200..700&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Teko:wght@300..700&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <title>Rivas & Luck Burgers</title>
 </head>
 
 <body>
+    <div id="error-backgound" style="display: none;">
+        <div id="error-display">
+            <h2>Llegaste al límite máximo de elementos</h2>
+        </div>
+    </div>
+    <header>
+        <div id="logoDiv"><img src="media/logoRivas&Luck.png" alt=""></div>
+        <div id="slogan">
+            <span>Donde cada mordisco cuenta</span>
+        </div>
+        <div id="spanContainer">
+            <span class="sectionSpan"><a href="#productos">Productos Destacados</a></span>
+            <span class="sectionSpan"><a href="#complementos">Complementos</a></span>
+            <span class="sectionSpan"><a href="#bebidas">Bebidas</a></span>
+        </div>
+        
+    </header>
     <div class="principal">
-
+        <div id="sponsorPanel">
+            <div class="sponsorImg">
+                <img src="media/promo.png" alt="">
+                <img src="media/promo2.png" alt="">
+            </div>
+        </div>
         <div class="productosGlobalesYPedido">
 
             <div class="productosGlobales">
+                <a name="productos"></a>
                 <h1>Productos Destacados</h1>
                 <div class="todosProductos">
                     <div class="producto">
-                        <img src="media/burger.png">
+                        <div class="productoImgDiv">
+                            <img src="media/burger.png">
+                        </div>
                         <h3>The Luck Burger</h3>
                         <div class="descripcion">
                             <p>Jugosa carne de ternera Angus italiana, queso cheddar fundido, tomate en rodajas  y nuestra salsa Lucchetti.</p>
@@ -31,7 +58,9 @@
             
             
                     <div class="producto">
-                        <img src="media/perrito.png">
+                        <div class="productoImgDiv">
+                            <img src="media/perrito.png">
+                        </div>
                         <h3>Hot Dog Rivas</h3>
                         <div class="descripcion">
                             <p>Salchicha Frankfurt premium, bañada en queso manchego derretido, mostaza de dijón y nuestra exclusiva salsa Manu's kétchup.</p>
@@ -41,7 +70,9 @@
                     </div>
             
                     <div class="producto">
-                        <img src="media/bocadillo.png">
+                        <div class="productoImgDiv">
+                            <img src="media/bocadillo.png">
+                        </div>
                         <h3>Panino Speciale</h3>
                         <div class="descripcion">
                             <p>Crujiente pan italiano relleno con finas láminas de jamón serrano, mozzarella fresca fundida, rúcula, tomate seco y un toque de alioli artesano al estilo Cattolica.</p>
@@ -50,12 +81,14 @@
                         <button onclick="anadirComida('bocadillo')">+</button>
                     </div>                    
                 </div>
-
+                <a name="complementos"></a>
                 <h1>Complementos</h1>
 
                 <div class="todosProductos">
                     <div class="producto">
-                        <img src="media/ensalada.png">
+                        <div class="productoImgDiv">
+                            <img src="media/ensalada.png">
+                        </div>
                         <h3>Fresh & Fit Salad</h3>
                         <div class="descripcion">
                             <p>Una combinación de lechuga crujiente, tomate, zanahoria y aliño especial. Ligera, saludable y llena de sabor.</p>
@@ -65,7 +98,9 @@
                     </div>
                                 
                     <div class="producto">
-                        <img src="media/patatas.png">
+                        <div class="productoImgDiv">
+                            <img src="media/patatas.png">
+                        </div>
                         <h3>Crunchy Fries</h3>
                         <div class="descripcion">
                             <p>Patatas fritas doradas, crujientes por fuera y suaves por dentro. ¡Perfectas para dipear con nuestras salsas exclusivas!</p>
@@ -75,7 +110,9 @@
                     </div>
             
                     <div class="producto">
-                        <img src="media/arosCebolla.png">
+                        <div class="productoImgDiv">
+                            <img src="media/arosCebolla.png">
+                        </div>
                         <h3>Onion Gold Rings</h3>
                         <div class="descripcion">
                             <p>Aros de cebolla extra crujientes, dorados a la perfección y servidos con tu salsa favorita. ¡Un bocado irresistible!.</p>
@@ -84,11 +121,13 @@
                         <button onclick="anadirComplemento('arosCebolla', 'Onion Gold Rings')">+</button>
                     </div>                   
                 </div>
-
+                <a name="bebidas"></a>
                 <h1>Bebidas</h1>
 
                 <div class="todosProductos">
                     <div class="producto">
+                        <div class="productoImgDiv">
+                            </div>
                         <img src="media/agua.png">
                         <h3>H2O Premium</h3>
                         <div class="descripcion">
@@ -99,7 +138,9 @@
                     </div>
         
                     <div class="producto">
+                        <div class="productoImgDiv">
                         <img src="media/cerveza.png">
+                        </div>
                         <h3>Heineken Ice Gold Sin Alcohol</h3>
                         <div class="descripcion">
                             <p>La icónica Heineken servida bien fría, con su sabor equilibrado y burbujeante. ¡El maridaje perfecto para tu menú!</p>
@@ -109,7 +150,9 @@
                     </div>
             
                     <div class="producto">
+                        <div class="productoImgDiv">
                         <img src="media/refrescos.png">
+                        </div>
                         <h3>Soft Drinks Selection</h3>
                         <div class="descripcion">
                             <p>Disfruta de nuestra selección de refrescos premium: Coca-Cola, Fanta, Sprite y más. Con y sin azúcar, ¡elige tu favorito!</p>
@@ -119,24 +162,25 @@
                     </div>                   
                 </div>
             </div>
-            <div class="pedido">
-                <img id="logoEmpresa" src="media/logoRivas&Luck.png">
-                <p id="mensajeBienvenida">Bienvenido a "Rivas & Luck Burgers"</p>
-                <p id="mensajeHacerPedido">Haga su pedido</p>
-            
-                <div id="contenidoPedido" style="display: none;">
-                    <h3>Producto Seleccionado:</h3>
-                    <ul id="listaPedido"></ul>
-            
-                    <h3>Total del pedido:</h3>
-                    <div class="btnConfirmarPedido">
-                        <p id="precioPedidoTotal"><strong>0 € </strong></p>
-                        <button onclick="terminarPedido()">Confirmar Pedido</button>
-                    </div>
+        </div>
+        <div class="pedido">
+            <img id="logoEmpresa" src="media/logoRivas&Luck.png">
+            <p id="mensajeBienvenida">Bienvenido a "Rivas & Luck Burgers"</p>
+            <p id="mensajeHacerPedido">Haga su pedido</p>
+        
+            <div id="contenidoPedido" style="display: none;">
+                <h3>Producto Seleccionado:</h3>
+                <ul id="listaPedido"></ul>
+        
+                <h3>Total del pedido:</h3>
+                <div class="btnConfirmarPedido">
+                    <p id="precioPedidoTotal"><strong>0 € </strong></p>
+                    <button onclick="terminarPedido()">Confirmar Pedido</button>
                 </div>
             </div>
-            
         </div>
+            
+        
         </div>
             
     
