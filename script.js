@@ -285,7 +285,6 @@ function actualizarPantallaPedido() {
     let listaPedido = document.getElementById("listaPedido");
     let contenidoPedido = document.getElementById("contenidoPedido");
     let logo = document.getElementById("logoEmpresa");
-    let logoPromo = document.getElementById("promo");
     let mensajeBienvenida = document.getElementById("mensajeBienvenida");
     let mensajeHacerPedido = document.getElementById("mensajeHacerPedido");
 
@@ -294,7 +293,6 @@ function actualizarPantallaPedido() {
         listaPedido.innerHTML = "";
         contenidoPedido.style.display = "block";
         logo.style.display = "none";
-        logoPromo.style.display = "none";
         mensajeBienvenida.style.display = "none";
         mensajeHacerPedido.style.display = "none";
 
@@ -346,7 +344,6 @@ function actualizarPantallaPedido() {
             // Si el pedido está vacío, volver a mostrar el logo y los mensajes
             contenidoPedido.style.display = "none";
             logo.style.display = "block";
-            logoPromo.style.display = "block";
             mensajeBienvenida.style.display = "block";
             mensajeHacerPedido.style.display = "block";
         }
