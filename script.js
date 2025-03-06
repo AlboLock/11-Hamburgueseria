@@ -233,57 +233,59 @@ function terminarPedido() {
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
     localStorage.setItem('numeroPedido', numeroPedido);
     actualizarPantallaPedido();
+
+
 }
 
 function anadirAPedidoRealizado(pedido, numeroPedido) {
-    let textoPedido = '';
-    textoPedido += `<div class="pedidoDisplay">
-                        <p><strong>Pedido #${numeroPedido}</strong></p>
-                        <p>Productos: ${function () {
-                                        let listaComidas = [];
-                                        for (let i = 0; i < pedido.length; i++) {
-                                            if (pedido[i].constructor.name == 'Comida')
-                                                listaComidas.push(pedido[i].nombre);
-                                        }
-                                        if (listaComidas.length > 0)
-                                            return listaComidas.join(', ');
-                                        else
-                                            return 'N/A';
-                                    }()}
-                        </p>
-                        <p>Complementos: ${function () {
-                                            let listaComplementos = [];
-                                            for (let i = 0; i < pedido.length; i++) {
-                                                if (pedido[i].constructor.name == 'Complemento')
-                                                    listaComplementos.push(pedido[i].nombre)
-                                            }
-                                            if (listaComplementos.length > 0)
-                                                return listaComplementos.join(', ');
-                                            else
-                                                return 'N/A';
-                                        }()}
-                        </p>
-                        <p>Bebidas: ${function () {
-                                        let listaBebidas = [];
-                                        for (let i = 0; i < pedido.length; i++) {
-                                            if (pedido[i].constructor.name == 'Bebida')
-                                                listaBebidas.push(pedido[i].nombre);
-                                        }
-                                        if (listaBebidas.length > 0)
-                                            return listaBebidas.join(', ');
-                                        else
-                                            return 'N/A';
-                                    }()}
-                        </p>
-                        <p>Estado: Realizado</p>
-                    </div>`;
+    let tiempoTotal = calcularTiempoPedido(pedido); // Tiempo total hasta "Listo para recoger"
+    let textoPedido = `
+        <div class="pedidoDisplay" id="pedido-${numeroPedido}">
+            <p><strong>Pedido #${numeroPedido}</strong></p>
+            <p>Productos: ${function () {
+                            let listaComidas = [];
+                            for (let i = 0; i < pedido.length; i++) {
+                                if (pedido[i].constructor.name == 'Comida')
+                                    listaComidas.push(pedido[i].nombre);
+                            }
+                            return listaComidas.length > 0 ? listaComidas.join(', ') : 'N/A';
+                        }()}
+            </p>
+            <p>Complementos: ${function () {
+                                let listaComplementos = [];
+                                for (let i = 0; i < pedido.length; i++) {
+                                    if (pedido[i].constructor.name == 'Complemento')
+                                        listaComplementos.push(pedido[i].nombre);
+                                }
+                                return listaComplementos.length > 0 ? listaComplementos.join(', ') : 'N/A';
+                            }()}
+            </p>
+            <p>Bebidas: ${function () {
+                            let listaBebidas = [];
+                            for (let i = 0; i < pedido.length; i++) {
+                                if (pedido[i].constructor.name == 'Bebida')
+                                    listaBebidas.push(pedido[i].nombre);
+                            }
+                            return listaBebidas.length > 0 ? listaBebidas.join(', ') : 'N/A';
+                        }()}
+            </p>
+            <p id="estado-${numeroPedido}">Estado: Realizado</p>
+            <p class="tiempoPedido" id="tiempo-${numeroPedido}">
+                <strong>Tiempo restante: ${formatearTiempo(tiempoTotal)}</strong>
+            </p>
+        </div>`;
     document.getElementById('listaPedidosRealizados').innerHTML += textoPedido;
+
+    iniciarCuentaAtras(numeroPedido, tiempoTotal); // Iniciar temporizador con tiempo total
 }
+
+
 
 function actualizarPantallaPedido() {
     let listaPedido = document.getElementById("listaPedido");
     let contenidoPedido = document.getElementById("contenidoPedido");
     let logo = document.getElementById("logoEmpresa");
+    let logoPromo = document.getElementById("promo");
     let mensajeBienvenida = document.getElementById("mensajeBienvenida");
     let mensajeHacerPedido = document.getElementById("mensajeHacerPedido");
 
@@ -292,6 +294,7 @@ function actualizarPantallaPedido() {
         listaPedido.innerHTML = "";
         contenidoPedido.style.display = "block";
         logo.style.display = "none";
+        logoPromo.style.display = "none";
         mensajeBienvenida.style.display = "none";
         mensajeHacerPedido.style.display = "none";
 
@@ -343,6 +346,7 @@ function actualizarPantallaPedido() {
             // Si el pedido está vacío, volver a mostrar el logo y los mensajes
             contenidoPedido.style.display = "none";
             logo.style.display = "block";
+            logoPromo.style.display = "block";
             mensajeBienvenida.style.display = "block";
             mensajeHacerPedido.style.display = "block";
         }
@@ -370,4 +374,101 @@ function timer(segundos) {
     intervals.push(intervalId);
 }
 
+function quitarComida(indice) {
+    pedidos[numeroPedido].splice(indice, 1);
+    calcularPrecioTotalPedido();
+    actualizarPantallaPedido();
+}
 
+function quitarComplemento(indice) {
+    pedidos[numeroPedido].splice(indice, 1);
+    calcularPrecioTotalPedido();
+    actualizarPantallaPedido();
+}
+
+function quitarBebida(indice) {
+    pedidos[numeroPedido].splice(indice, 1);
+    calcularPrecioTotalPedido();
+    actualizarPantallaPedido();
+}
+
+// Tiempo preparación
+
+
+function calcularTiempoPedido(pedido) {
+    let totalElementos = 0;
+    for (let i = 0; i < pedido.length; i++) {
+        if (pedido[i].constructor.name === "Comida" || pedido[i].constructor.name === "Complemento") {
+            totalElementos++;
+        }
+    }
+    let tiempoBase = totalElementos * 30; // 30s por alimento
+    let tiempoAleatorio = Math.floor(Math.random() * 21) - 10; // ±10s
+    return Math.max(30, tiempoBase + tiempoAleatorio); // Mínimo 30s
+}
+
+
+function iniciarCuentaAtras(numeroPedido, tiempoTotal) {
+    let tiempoRestante = tiempoTotal;
+    let estadoActual = 'Realizado';
+    const tiempoMitad = Math.floor(tiempoTotal / 2); // Mitad del tiempo para "En proceso"
+
+    const intervalo = setInterval(() => {
+        tiempoRestante -= 10;
+        const tiempoElement = document.getElementById(`tiempo-${numeroPedido}`);
+        const estadoElement = document.getElementById(`estado-${numeroPedido}`);
+        const pedidoElement = document.getElementById(`pedido-${numeroPedido}`);
+
+        if (!pedidoElement) {
+            clearInterval(intervalo);
+            return;
+        }
+
+        if (tiempoRestante > 0) {
+            tiempoElement.innerHTML = `<strong>Tiempo restante: ${formatearTiempo(tiempoRestante)}</strong>`;
+        }
+
+        // Cambiar estados
+        if (estadoActual === 'Realizado' && tiempoRestante <= tiempoMitad) {
+            estadoActual = 'En proceso';
+            estadoElement.textContent = 'Estado: En proceso';
+            document.getElementById('listaPedidosEnProceso').appendChild(pedidoElement);
+        } else if (estadoActual === 'En proceso' && tiempoRestante <= 0) {
+            estadoActual = 'Listo para recoger';
+            estadoElement.textContent = 'Estado: Listo para recoger';
+            pedidoElement.innerHTML += `<button onclick="recogerPedido(${numeroPedido})">Recoger pedido</button>`;
+            document.getElementById('listaPedidosListos').appendChild(pedidoElement);
+            tiempoElement.innerHTML = '<strong>Listo</strong>';
+            clearInterval(intervalo);
+        }
+
+        // Manejar retrasos
+        if (tiempoRestante <= 0 && estadoActual !== 'Listo para recoger') {
+            tiempoElement.innerHTML = '<strong>Retraso: 0:00</strong>';
+            clearInterval(intervalo);
+            let retraso = 0;
+            const retrasoIntervalo = setInterval(() => {
+                retraso += 10;
+                if (tiempoElement) {
+                    tiempoElement.innerHTML = `<strong>Retraso: ${formatearTiempo(retraso)}</strong>`;
+                } else {
+                    clearInterval(retrasoIntervalo);
+                }
+            }, 10000);
+        }
+    }, 10000); // Actualizar cada 10s
+}
+
+function formatearTiempo(tiempoEnSegundos) {
+    let minutos = Math.floor(tiempoEnSegundos / 60);
+    let segundos = tiempoEnSegundos % 60;
+    return `${minutos}:${segundos < 10 ? "0" : ""}${segundos}`;
+}
+
+// Función para recoger pedido (ya estaba bien)
+function recogerPedido(numeroPedido) {
+    const pedidoElement = document.getElementById(`pedido-${numeroPedido}`);
+    if (pedidoElement) pedidoElement.remove();
+    pedidos[numeroPedido] = null;
+    localStorage.setItem('pedidos', JSON.stringify(pedidos));
+}

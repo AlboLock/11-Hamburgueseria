@@ -92,9 +92,13 @@ header{
     display: flex;
     flex-direction: column;
     background-color: white;
-    padding: 30px 20px 20px 20px ;
+    padding: 30px 20px 20px 20px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: sticky; /* Fijar cuando se hace scroll */
+    top: 20px; /* Fijar a 20px desde la parte superior al hacer scroll */
+    height: calc(100vh - 40px); /* Ocupar casi toda la altura de la pantalla */
+    overflow-y: auto; /* Permitir scroll interno */
 }
 
 #sponsorPanel{
