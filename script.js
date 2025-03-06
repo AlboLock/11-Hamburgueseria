@@ -289,7 +289,7 @@ function actualizarPantallaPedido() {
     let mensajeHacerPedido = document.getElementById("mensajeHacerPedido");
 
     // Verificar si hay algo en el pedido
-    if (pedidos[numeroPedido]) {
+    if (pedidos[numeroPedido] && pedidos[numeroPedido].length > 0) {
         listaPedido.innerHTML = "";
         contenidoPedido.style.display = "block";
         logo.style.display = "none";
