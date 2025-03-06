@@ -284,6 +284,10 @@ button:hover {
 
 }
 
+#logoEmpresa{
+    margin-top: 4rem;
+}
+
 .pedidoDisplay {
     background-color: white;
     padding: 15px;
