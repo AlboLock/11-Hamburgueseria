@@ -108,11 +108,14 @@ header{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    height: 80vh;
 }
 
 #sponsorPanel img{
     max-width: 100%;
-    margin: 5rem 0;
+    margin: 0rem 0;
+    height: auto;
+    
 }
 
 #slogan{
