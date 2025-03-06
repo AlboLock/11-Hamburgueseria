@@ -109,6 +109,7 @@ header{
     justify-content: space-between;
     align-items: center;
     height: 80vh;
+    margin-top: 1.5em;
 }
 
 #sponsorPanel img{
@@ -128,6 +129,14 @@ header{
     font-weight: 400;
     font-style: normal;
     color: white;
+    font-size: 2rem;
+}
+
+#mensajeHacerPedido {
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: red;
     font-size: 2rem;
 }
 
@@ -285,7 +294,7 @@ button:hover {
 }
 
 #logoEmpresa{
-    margin-top: 4rem;
+    margin-top: 2.5rem;
 }
 
 .pedidoDisplay {
