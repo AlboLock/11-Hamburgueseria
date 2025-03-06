@@ -73,8 +73,13 @@ function anadirComida(comida) {
         }
     } else {
         document.getElementById('error-backgound').style.display = 'flex';
+        setTimeout(closeError, 2000);
     }
     
+}
+
+function closeError(){
+    document.getElementById('error-backgound').style.display = 'none';
 }
 
 function toggleExtras(idExpandable, header) {
@@ -199,6 +204,7 @@ function anadirComplemento(tipo, complemento) {
         actualizarPantallaPedido();
     } else {
         document.getElementById('error-backgound').style.display = 'flex';
+        setTimeout(closeError, 2000);
     }
 }
 
@@ -216,6 +222,7 @@ function anadirBebida(tipo, bebida) {
         actualizarPantallaPedido();
     } else {
         document.getElementById('error-backgound').style.display = 'flex';
+        setTimeout(closeError, 2000);
     }
 }
 
@@ -233,8 +240,6 @@ function terminarPedido() {
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
     localStorage.setItem('numeroPedido', numeroPedido);
     actualizarPantallaPedido();
-
-
 }
 
 function anadirAPedidoRealizado(pedido, numeroPedido) {
@@ -466,6 +471,6 @@ function formatearTiempo(tiempoEnSegundos) {
 function recogerPedido(numeroPedido) {
     const pedidoElement = document.getElementById(`pedido-${numeroPedido}`);
     if (pedidoElement) pedidoElement.remove();
-    pedidos[numeroPedido] = null;
+    pedidos.splice(numeroPedido, 1);
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
 }
