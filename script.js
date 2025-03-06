@@ -53,7 +53,11 @@ let burger;
 let perrito;
 let bocadillo;
 function anadirComida(comida) {
-    switch (comida) {
+    if (!pedidos[numeroPedido]) {
+        pedidos[numeroPedido] = [];
+    }
+    if (pedidos[numeroPedido].length < 50){
+        switch (comida) {
         case 'burger':
             burger = new Comida('burger', 'The Luck Burger', 5, ['Pan', 'Carne', 'Lechuga', 'Tomate', 'Queso']);
             pintarVentanaModificar(burger)
@@ -66,7 +70,11 @@ function anadirComida(comida) {
             bocadillo = new Comida('bocadillo', 'Panino Lucchetti Speciale', 4, ['Pan', 'Jamón', 'Queso', 'Tomate']);
             pintarVentanaModificar(bocadillo)
             break;
+        }
+    } else {
+        document.getElementById('error-backgound').style.display = 'flex';
     }
+    
 }
 
 function toggleExtras(idExpandable, header) {
@@ -180,29 +188,35 @@ const preciosBebidas = {
 // Añadir y quitar complementos 
 
 function anadirComplemento(tipo, complemento) {
-    let precio = preciosComplementos[complemento];  // Busca el precio en el objeto
-    let nuevoComplemento = new Complemento(tipo, complemento, precio);
-    if (!pedidos[numeroPedido]) {
-        pedidos[numeroPedido] = [];
+        let precio = preciosComplementos[complemento];  // Busca el precio en el objeto
+        let nuevoComplemento = new Complemento(tipo, complemento, precio);
+        if (!pedidos[numeroPedido]) {
+            pedidos[numeroPedido] = [];
+        }
+        if (pedidos[numeroPedido].length < 50){
+        pedidos[numeroPedido].push(nuevoComplemento);
+        calcularPrecioTotalPedido();
+        actualizarPantallaPedido();
+    } else {
+        document.getElementById('error-backgound').style.display = 'flex';
     }
-    pedidos[numeroPedido].push(nuevoComplemento);
-    calcularPrecioTotalPedido();
-    actualizarPantallaPedido();
-    //numeroPedido.precioTotal += precio;
-
 }
 
 // Añadir y quitar bebidas
 
 function anadirBebida(tipo, bebida) {
-    let precio = preciosBebidas[bebida];  // Busca el precio en el objeto
-    let nuevaBebida = new Bebida(tipo, bebida, precio);
-    if (!pedidos[numeroPedido]) {
-        pedidos[numeroPedido] = [];
+        let precio = preciosBebidas[bebida];  // Busca el precio en el objeto
+        let nuevaBebida = new Bebida(tipo, bebida, precio);
+        if (!pedidos[numeroPedido]) {
+            pedidos[numeroPedido] = [];
+        }
+        if (pedidos[numeroPedido].length < 50){
+        pedidos[numeroPedido].push(nuevaBebida);
+        calcularPrecioTotalPedido();
+        actualizarPantallaPedido();
+    } else {
+        document.getElementById('error-backgound').style.display = 'flex';
     }
-    pedidos[numeroPedido].push(nuevaBebida);
-    calcularPrecioTotalPedido();
-    actualizarPantallaPedido();
 }
 
 function calcularPrecioTotalPedido() {
@@ -338,33 +352,27 @@ function actualizarPantallaPedido() {
         }
     } 
 
-// function quitarComida(indice) {
-//     numeroPedido.precioTotal -= numeroPedido.comida[indice].precio; 
-//     numeroPedido.comida.splice(indice, 1); 
-//     actualizarPantallaPedido();
-// }
+let intervals = [];
+function tiempo() {
+    let segundos = 30;
+    timer(segundos);
+}
 
-
-// function quitarComplemento(indice) {
-//     numeroPedido.precioTotal -= numeroPedido.complementos[indice].precio;
-//     numeroPedido.complementos.splice(indice, 1);
-//     actualizarPantallaPedido();
-// }
-
-// function quitarBebida(indice) {
-//     numeroPedido.precioTotal -= numeroPedido.bebidas[indice].precio;
-//     numeroPedido.bebidas.splice(indice, 1);
-//     actualizarPantallaPedido();
-// }
-
-// function formatearNombreArchivo(nombre) {
-//     return nombre.replace(/\s+/g, "").replace(/[^\w.-]/g, ""); // Elimina espacios y caracteres especiales
-// }
-
-
-
-// Funciones de eliminación añadidas (nuevas)
-
+function timer(segundos) {
+    let intervalId;
+    let error = Math.floor(Math.random() * 20) - 10;
+    let tiempoRestante = segundos + error;
+    console.log(tiempoRestante);
+    intervalId = setInterval(function () {
+        tiempoRestante--;
+        if (tiempoRestante == 0) {
+            console.log('Finito');
+            clearInterval(intervalId);
+        }
+        console.log(tiempoRestante);
+    }, 1000);
+    intervals.push(intervalId);
+}
 
 function quitarComida(indice) {
     pedidos[numeroPedido].splice(indice, 1);
