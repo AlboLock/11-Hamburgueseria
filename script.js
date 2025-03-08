@@ -1,29 +1,30 @@
 let pedidos = [];
 let numeroPedido = 0;
-
 window.onload = function () {
     pedidos = JSON.parse(localStorage.getItem('pedidos'));
-    numeroPedido = localStorage.getItem('numeroPedido')
+    numeroPedido = localStorage.getItem('numeroPedido');
+    pedidos[numeroPedido] = null;
     if (pedidos == null){
         pedidos = [];
         numeroPedido = 0;
     } else {
         for (let i=0; i<pedidos.length; i++){
-            for (let j = 0; j < pedidos[i].length; j++) {
-                let item = pedidos[i][j];
-                if (item.tipo == 'burger' || item.tipo == 'perrito' || item.tipo == 'bocadillo') {
-                    Object.setPrototypeOf(item, Comida.prototype);
+            if (pedidos[i] != null && pedidos[i].alimentos != null){
+                for (let j = 0; j < pedidos[i].alimentos.length; j++) {
+                    let item = pedidos[i].alimentos[j];
+                    if (item.tipo == 'burger' || item.tipo == 'perrito' || item.tipo == 'bocadillo') {
+                        Object.setPrototypeOf(item, Comida.prototype);
+                    }
+                    if (item.tipo == 'ensalada' || item.tipo == 'patatas' || item.tipo == 'arosCebolla') {
+                        Object.setPrototypeOf(item, Complemento.prototype);
+                    }
+                    if (item.tipo == 'agua' || item.tipo == 'cerveza' || item.tipo == 'refrescos') {
+                        Object.setPrototypeOf(item, Bebida.prototype);
+                    }
                 }
-                if (item.tipo == 'ensalada' || item.tipo == 'patatas' || item.tipo == 'arosCebolla') {
-                    Object.setPrototypeOf(item, Complemento.prototype);
-                }
-                if (item.tipo == 'agua' || item.tipo == 'cerveza' || item.tipo == 'refrescos') {
-                    Object.setPrototypeOf(item, Bebida.prototype);
-                }
+                anadirAPedidoRealizado(pedidos[i], i, pedidos[i].tiempo, 'old');
             }
-            anadirAPedidoRealizado(pedidos[i], i);
         }
-        
     }
 }
 
@@ -54,9 +55,9 @@ let perrito;
 let bocadillo;
 function anadirComida(comida) {
     if (!pedidos[numeroPedido]) {
-        pedidos[numeroPedido] = [];
+        pedidos[numeroPedido] = { alimentos: [], tiempo: 0 };
     }
-    if (pedidos[numeroPedido].length < 50){
+    if (pedidos[numeroPedido].alimentos.length < 50){
         switch (comida) {
         case 'burger':
             burger = new Comida('burger', 'The Luck Burger', 5, ['Pan', 'Carne', 'Lechuga', 'Tomate', 'Queso']);
@@ -130,10 +131,7 @@ function pintarVentanaModificar(comida) {
 }
 
 function anadirACarrito(comida) {
-    if (!pedidos[numeroPedido]) {
-        pedidos[numeroPedido] = [];
-    }
-    pedidos[numeroPedido].push(comida);
+    pedidos[numeroPedido].alimentos.push(comida);
     document.getElementById('modifyWindow').style.display = 'none';
     document.body.style.overflow = 'auto';
     calcularPrecioTotalPedido();
@@ -196,16 +194,16 @@ function anadirComplemento(tipo, complemento) {
         let precio = preciosComplementos[complemento];  // Busca el precio en el objeto
         let nuevoComplemento = new Complemento(tipo, complemento, precio);
         if (!pedidos[numeroPedido]) {
-            pedidos[numeroPedido] = [];
+            pedidos[numeroPedido] = { alimentos: [], tiempo: 0 };
         }
-        if (pedidos[numeroPedido].length < 50){
-        pedidos[numeroPedido].push(nuevoComplemento);
-        calcularPrecioTotalPedido();
-        actualizarPantallaPedido();
-    } else {
-        document.getElementById('error-backgound').style.display = 'flex';
-        setTimeout(closeError, 2000);
-    }
+        if (pedidos[numeroPedido].alimentos.length < 50){
+            pedidos[numeroPedido].alimentos.push(nuevoComplemento);
+            calcularPrecioTotalPedido();
+            actualizarPantallaPedido();
+        } else {
+            document.getElementById('error-backgound').style.display = 'flex';
+            setTimeout(closeError, 2000);
+        }
 }
 
 // Añadir y quitar bebidas
@@ -214,10 +212,10 @@ function anadirBebida(tipo, bebida) {
         let precio = preciosBebidas[bebida];  // Busca el precio en el objeto
         let nuevaBebida = new Bebida(tipo, bebida, precio);
         if (!pedidos[numeroPedido]) {
-            pedidos[numeroPedido] = [];
+            pedidos[numeroPedido] = { alimentos: [], tiempo: 0 };
         }
-        if (pedidos[numeroPedido].length < 50){
-        pedidos[numeroPedido].push(nuevaBebida);
+        if (pedidos[numeroPedido].alimentos.length < 50){
+            pedidos[numeroPedido].alimentos.push(nuevaBebida);
         calcularPrecioTotalPedido();
         actualizarPantallaPedido();
     } else {
@@ -228,61 +226,75 @@ function anadirBebida(tipo, bebida) {
 
 function calcularPrecioTotalPedido() {
     let precioTotal = 0;
-    for (let i = 0; i < pedidos[numeroPedido].length; i++) {
-        precioTotal += pedidos[numeroPedido][i].precio;
+    for (let i = 0; i < pedidos[numeroPedido].alimentos.length; i++) {
+        precioTotal += pedidos[numeroPedido].alimentos[i].precio;
     }
     document.getElementById('precioPedidoTotal').innerHTML = `<strong>${precioTotal.toFixed(2)} € </strong>`;
 }
 
 function terminarPedido() {
-    anadirAPedidoRealizado(pedidos[numeroPedido], numeroPedido);
-    numeroPedido++;
+    let tiempoTotal = calcularTiempoPedido(pedidos[numeroPedido].alimentos);
+    pedidos[numeroPedido].tiempo =  tiempoTotal;
+    anadirAPedidoRealizado(pedidos[numeroPedido], numeroPedido, tiempoTotal, 'new');
+    
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
     localStorage.setItem('numeroPedido', numeroPedido);
+    console.log(pedidos)
+    numeroPedido++;
     actualizarPantallaPedido();
 }
 
-function anadirAPedidoRealizado(pedido, numeroPedido) {
-    let tiempoTotal = calcularTiempoPedido(pedido); // Tiempo total hasta "Listo para recoger"
-    let textoPedido = `
+function anadirAPedidoRealizado(pedido, numeroPedido, tiempoTotal, status) {
+    let tiempoBase = 0;
+    if (status == 'new'){
+        let totalElementos = 0;
+        for (let i = 0; i < pedido.alimentos.length; i++) {
+            if (pedido.alimentos[i].constructor.name === "Comida" || pedido.alimentos[i].constructor.name === "Complemento") {
+                totalElementos++;
+            }
+        }
+        tiempoBase = totalElementos * 30;
+    } else {
+        tiempoBase = Math.abs(tiempoTotal - tiempoBase);
+    }
+        let textoPedido = `
         <div class="pedidoDisplay" id="pedido-${numeroPedido}">
             <p><strong>Pedido #${numeroPedido}</strong></p>
             <p>Productos: ${function () {
-                            let listaComidas = [];
-                            for (let i = 0; i < pedido.length; i++) {
-                                if (pedido[i].constructor.name == 'Comida')
-                                    listaComidas.push(pedido[i].nombre);
-                            }
-                            return listaComidas.length > 0 ? listaComidas.join(', ') : 'N/A';
-                        }()}
+                let listaComidas = [];
+                for (let i = 0; i < pedido.alimentos.length; i++) {
+                    if (pedido.alimentos[i].constructor.name == 'Comida')
+                        listaComidas.push(pedido.alimentos[i].nombre);
+                }
+                return listaComidas.length > 0 ? listaComidas.join(', ') : 'N/A';
+            }()}
             </p>
             <p>Complementos: ${function () {
-                                let listaComplementos = [];
-                                for (let i = 0; i < pedido.length; i++) {
-                                    if (pedido[i].constructor.name == 'Complemento')
-                                        listaComplementos.push(pedido[i].nombre);
-                                }
-                                return listaComplementos.length > 0 ? listaComplementos.join(', ') : 'N/A';
-                            }()}
+                let listaComplementos = [];
+            for (let i = 0; i < pedido.alimentos.length; i++) {
+                if (pedido.alimentos[i].constructor.name == 'Complemento')
+                    listaComplementos.push(pedido.alimentos[i].nombre);
+                }
+                return listaComplementos.length > 0 ? listaComplementos.join(', ') : 'N/A';
+            }()}
             </p>
             <p>Bebidas: ${function () {
-                            let listaBebidas = [];
-                            for (let i = 0; i < pedido.length; i++) {
-                                if (pedido[i].constructor.name == 'Bebida')
-                                    listaBebidas.push(pedido[i].nombre);
-                            }
-                            return listaBebidas.length > 0 ? listaBebidas.join(', ') : 'N/A';
-                        }()}
+                let listaBebidas = [];
+            for (let i = 0; i < pedido.alimentos.length; i++) {
+                    if (pedido.alimentos[i].constructor.name == 'Bebida')
+                        listaBebidas.push(pedido.alimentos[i].nombre);
+                }
+                return listaBebidas.length > 0 ? listaBebidas.join(', ') : 'N/A';
+            }()}
             </p>
             <p id="estado-${numeroPedido}">Estado: Realizado</p>
             <p class="tiempoPedido" id="tiempo-${numeroPedido}">
-                <strong>Tiempo restante: ${formatearTiempo(tiempoTotal)}</strong>
+                <strong>Tiempo restante: ${formatearTiempo(tiempoBase)}</strong>
             </p>
         </div>`;
-    document.getElementById('listaPedidosRealizados').innerHTML += textoPedido;
-
-    iniciarCuentaAtras(numeroPedido, tiempoTotal); // Iniciar temporizador con tiempo total
-}
+        document.getElementById('listaPedidosRealizados').innerHTML += textoPedido;
+        iniciarCuentaAtras(numeroPedido, tiempoTotal, tiempoBase); // Iniciar temporizador con tiempo total 
+} 
 
 
 
@@ -294,7 +306,7 @@ function actualizarPantallaPedido() {
     let mensajeHacerPedido = document.getElementById("mensajeHacerPedido");
 
     // Verificar si hay algo en el pedido
-    if (pedidos[numeroPedido] && pedidos[numeroPedido].length > 0) {
+    if (pedidos[numeroPedido]) {
         listaPedido.innerHTML = "";
         contenidoPedido.style.display = "block";
         logo.style.display = "none";
@@ -302,9 +314,9 @@ function actualizarPantallaPedido() {
         mensajeHacerPedido.style.display = "none";
 
         // Mostrar todas las comidas
-        for (let i = 0; i < pedidos[numeroPedido].length; i++) {
-            if (pedidos[numeroPedido][i].constructor.name == 'Comida'){
-                let comida = pedidos[numeroPedido][i];
+        for (let i = 0; i < pedidos[numeroPedido].alimentos.length; i++) {
+            if (pedidos[numeroPedido].alimentos[i].constructor.name == 'Comida'){
+                let comida = pedidos[numeroPedido].alimentos[i];
                 let li = document.createElement("li");
                 li.classList.add("itemPedido");
                 li.innerHTML = `
@@ -317,9 +329,9 @@ function actualizarPantallaPedido() {
         }
 
         // Mostrar complementos
-        for (let i = 0; i < pedidos[numeroPedido].length; i++) {
-            if (pedidos[numeroPedido][i].constructor.name == 'Complemento') {
-                let complemento = pedidos[numeroPedido][i];
+        for (let i = 0; i < pedidos[numeroPedido].alimentos.length; i++) {
+            if (pedidos[numeroPedido].alimentos[i].constructor.name == 'Complemento') {
+                let complemento = pedidos[numeroPedido].alimentos[i];
                 let li = document.createElement("li");
                 li.classList.add("itemPedido");
                 li.innerHTML = `
@@ -332,9 +344,9 @@ function actualizarPantallaPedido() {
         }
         
         // Mostrar bebidas
-        for (let i = 0; i < pedidos[numeroPedido].length; i++) {
-            if (pedidos[numeroPedido][i].constructor.name == 'Bebida') {
-                let bebida = pedidos[numeroPedido][i];
+        for (let i = 0; i < pedidos[numeroPedido].alimentos.length; i++) {
+            if (pedidos[numeroPedido].alimentos[i].constructor.name == 'Bebida') {
+                let bebida = pedidos[numeroPedido].alimentos[i];
                 let li = document.createElement("li");
                 li.classList.add("itemPedido");
                 li.innerHTML = `
@@ -345,36 +357,15 @@ function actualizarPantallaPedido() {
                 listaPedido.appendChild(li);
             }
         }
-        } else {
-            // Si el pedido está vacío, volver a mostrar el logo y los mensajes
-            contenidoPedido.style.display = "none";
-            logo.style.display = "block";
-            mensajeBienvenida.style.display = "block";
-            mensajeHacerPedido.style.display = "block";
-        }
-    } 
+    } else {
+        // Si el pedido está vacío, volver a mostrar el logo y los mensajes
+        contenidoPedido.style.display = "none";
+        logo.style.display = "block";
+        mensajeBienvenida.style.display = "block";
+        mensajeHacerPedido.style.display = "block";
+    }
+} 
 
-let intervals = [];
-function tiempo() {
-    let segundos = 30;
-    timer(segundos);
-}
-
-function timer(segundos) {
-    let intervalId;
-    let error = Math.floor(Math.random() * 20) - 10;
-    let tiempoRestante = segundos + error;
-    console.log(tiempoRestante);
-    intervalId = setInterval(function () {
-        tiempoRestante--;
-        if (tiempoRestante == 0) {
-            console.log('Finito');
-            clearInterval(intervalId);
-        }
-        console.log(tiempoRestante);
-    }, 1000);
-    intervals.push(intervalId);
-}
 
 function quitarComida(indice) {
     pedidos[numeroPedido].splice(indice, 1);
@@ -410,13 +401,17 @@ function calcularTiempoPedido(pedido) {
 }
 
 
-function iniciarCuentaAtras(numeroPedido, tiempoTotal) {
+function iniciarCuentaAtras(numeroPedido, tiempoTotal, tiempoBase) {
     let tiempoRestante = tiempoTotal;
     let estadoActual = 'Realizado';
-    const tiempoMitad = Math.floor(tiempoTotal / 2); // Mitad del tiempo para "En proceso"
-
+    const tiempoMitad = Math.floor(tiempoTotal / 2);
+    let actualizacionContador = 0;
     const intervalo = setInterval(() => {
-        tiempoRestante -= 10;
+        tiempoRestante--;
+        tiempoBase--;
+        actualizacionContador++;
+        pedidos[numeroPedido].tiempo = tiempoRestante;
+        localStorage.setItem('pedidos', JSON.stringify(pedidos));
         const tiempoElement = document.getElementById(`tiempo-${numeroPedido}`);
         const estadoElement = document.getElementById(`estado-${numeroPedido}`);
         const pedidoElement = document.getElementById(`pedido-${numeroPedido}`);
@@ -426,11 +421,11 @@ function iniciarCuentaAtras(numeroPedido, tiempoTotal) {
             return;
         }
 
-        if (tiempoRestante > 0) {
+        // Update HTML every 10 seconds
+        if (actualizacionContador % 10 === 0) {
             tiempoElement.innerHTML = `<strong>Tiempo restante: ${formatearTiempo(tiempoRestante)}</strong>`;
         }
 
-        // Cambiar estados
         if (estadoActual === 'Realizado' && tiempoRestante <= tiempoMitad) {
             estadoActual = 'En proceso';
             estadoElement.textContent = 'Estado: En proceso';
@@ -440,25 +435,30 @@ function iniciarCuentaAtras(numeroPedido, tiempoTotal) {
             estadoElement.textContent = 'Estado: Listo para recoger';
             pedidoElement.innerHTML += `<button onclick="recogerPedido(${numeroPedido})">Recoger pedido</button>`;
             document.getElementById('listaPedidosListos').appendChild(pedidoElement);
-            tiempoElement.innerHTML = '<strong>Listo</strong>';
+            document.getElementById(`tiempo-${numeroPedido}`).innerHTML = '';
             clearInterval(intervalo);
         }
 
         // Manejar retrasos
-        if (tiempoRestante <= 0 && estadoActual !== 'Listo para recoger') {
-            tiempoElement.innerHTML = '<strong>Retraso: 0:00</strong>';
+        if (tiempoRestante > tiempoBase && estadoActual === 'En proceso') {
             clearInterval(intervalo);
             let retraso = 0;
+            let calculoRetraso = tiempoRestante - tiempoBase;
+            document.getElementById(`tiempo-${numeroPedido}`).innerHTML = `<strong style="color: red">Retraso: ${formatearTiempo(retraso)}</strong>`;
             const retrasoIntervalo = setInterval(() => {
-                retraso += 10;
-                if (tiempoElement) {
-                    tiempoElement.innerHTML = `<strong>Retraso: ${formatearTiempo(retraso)}</strong>`;
-                } else {
+                retraso++;
+                document.getElementById(`tiempo-${numeroPedido}`).innerHTML = `<strong style="color: red">Retraso: ${formatearTiempo(retraso)}</strong>`;
+                if (retraso == calculoRetraso){
+                    estadoActual = 'Listo para recoger';
+                    estadoElement.textContent = 'Estado: Listo para recoger';
+                    pedidoElement.innerHTML += `<button onclick="recogerPedido(${numeroPedido})">Recoger pedido</button>`;
+                    document.getElementById('listaPedidosListos').appendChild(pedidoElement);
+                    document.getElementById(`tiempo-${numeroPedido}`).innerHTML = '';
                     clearInterval(retrasoIntervalo);
                 }
-            }, 10000);
+            }, 1000);
         }
-    }, 10000); // Actualizar cada 10s
+    }, 1000);
 }
 
 function formatearTiempo(tiempoEnSegundos) {
@@ -471,6 +471,6 @@ function formatearTiempo(tiempoEnSegundos) {
 function recogerPedido(numeroPedido) {
     const pedidoElement = document.getElementById(`pedido-${numeroPedido}`);
     if (pedidoElement) pedidoElement.remove();
-    pedidos.splice(numeroPedido, 1);
+    pedidos[numeroPedido] = null;
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
 }
